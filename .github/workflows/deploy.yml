@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
@@ -16,16 +17,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: frontend/package-lock.json
+          node-version: '22'
 
       - name: Install dependencies
-        working-directory: ./frontend
-        run: npm ci
+        run: npm install
 
       - name: Build Next.js site
-        working-directory: ./frontend
         run: npm run build
 
       - name: Deploy to Hostinger via FTP
@@ -35,6 +32,6 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: ${{ secrets.FTP_SERVER_DIR }}
-          local-dir: ./frontend/out/
+          local-dir: ./out/
           protocol: ftp
           port: 21
