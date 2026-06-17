@@ -1,0 +1,180 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+  color: #0f172a;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+input,
+textarea,
+select,
+button {
+  font: inherit;
+} */
+
+
+
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+    color: #0f172a;
+    overflow-x: hidden;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+}
+
+@layer utilities {
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  .animate-pulse-slow {
+    animation: pulseSlow 2s ease-in-out infinite;
+  }
+  
+  .animate-spin-slow {
+    animation: spinSlow 8s linear infinite;
+  }
+  
+  .bg-gradient-shine {
+    background: linear-gradient(90deg, 
+      transparent, 
+      rgba(255,255,255,0.2), 
+      transparent);
+    background-size: 200% 100%;
+    animation: shine 2s infinite;
+  }
+  
+  .text-gradient {
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  
+  .glass-morphism {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .card-hover {
+    transition: all 0.3s ease;
+  }
+  
+  .card-hover:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes pulseSlow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes shine {
+  to { background-position: -200% 0; }
+}
+
+
+/* Mobile Responsive Optimizations */
+@media (max-width: 768px) {
+  /* Prevent zoom on input focus in iOS */
+  input, select, button {
+    font-size: 16px !important;
+  }
+  
+  /* Better touch targets */
+  button, 
+  a,
+  [role="button"],
+  input,
+  select {
+    min-height: 44px;
+  }
+  
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Better text rendering */
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Tablet and up */
+@media (min-width: 768px) {
+  .container-custom {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .container-custom {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+
+
+/* For smooth scrolling with fixed navbar */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+@media (max-width: 768px) {
+  html {
+    scroll-padding-top: 70px;
+  }
+}
+
+/* Hide scrollbar on mobile menu when open */
+body.menu-open {
+  overflow: hidden;
+}
