@@ -1,0 +1,16 @@
+# Set index.html as default
+DirectoryIndex index.html
+
+# Enable rewriting
+RewriteEngine On
+
+# Handle Next.js routing - try file, then folder/index.html, then 404
+RewriteRule ^([^.]+[^/])$ $1/ [L,R=301]
+
+# Serve index.html for clean URLs
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)$ /$1.html [L]
+
+# Custom 404 page
+ErrorDocument 404 /404.html
