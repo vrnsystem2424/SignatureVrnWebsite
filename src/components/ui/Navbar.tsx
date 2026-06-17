@@ -64,8 +64,8 @@ export default function Navbar() {
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
             >
-              <span className="text-white">Ultimate</span>
-              <span className="text-amber-500">Heights</span>
+              <span className="text-white">Signatures </span>
+              <span className="text-amber-500">Builders</span>
             </a>
 
             {/* Desktop Menu */}
