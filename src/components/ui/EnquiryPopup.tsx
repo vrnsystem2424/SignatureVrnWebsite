@@ -48,7 +48,7 @@ export default function EnquiryPopup() {
     };
   }, []);
 
- const handleSubmit = async (e: React.FormEvent) => {
+const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
   setIsSubmitting(true);
 
@@ -61,16 +61,14 @@ export default function EnquiryPopup() {
       email: formData.email,
       requirement: formData.requirement,
       source: "Enquiry Popup",
-      timestamp: new Date().toISOString(),
     });
 
-    // ✅ Direct Google Script call - No API route
     await fetch(`${GOOGLE_SCRIPT_URL}?${params.toString()}`, {
       method: "GET",
       mode: "no-cors",
     });
 
-    // ✅ no-cors mein response check nahi hota, direct success
+    // ✅ Success screen + timestamp save
     localStorage.setItem("enquirySubmittedAt", Date.now().toString());
     setIsSuccess(true);
     setFormData({ name: "", phone: "", email: "", requirement: "" });
@@ -82,7 +80,6 @@ export default function EnquiryPopup() {
     setIsSubmitting(false);
   }
 };
-
   const handleClose = () => {
     setIsOpen(false);
     // Reset success state after close animation

@@ -15,7 +15,7 @@ export default function LeadForm() {
     message: "",
   });
 
- const handleSubmit = async (e: React.FormEvent) => {
+const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
   setIsSubmitting(true);
 
@@ -36,6 +36,7 @@ export default function LeadForm() {
       mode: "no-cors",
     });
 
+    // ✅ Success screen show karo
     setIsSuccess(true);
     setFormData({
       name: "",
