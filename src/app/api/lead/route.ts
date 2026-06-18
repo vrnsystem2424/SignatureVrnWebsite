@@ -27,12 +27,14 @@
 //   }
 // }
 
-
-// app/api/lead/route.ts
-
 import { NextRequest, NextResponse } from "next/server";
 
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxLyME_VTWheBcDSzZqDApGghlm1nHRMKxe2c6kmXG0-bGvl04GccPxHAvHvCJxjgCXmg/exec";
+
+// ✅ GET handler (trailing slash issue fix)
+export async function GET() {
+  return NextResponse.json({ status: "ok" });
+}
 
 export async function POST(request: NextRequest) {
   try {

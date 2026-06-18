@@ -213,16 +213,16 @@ export default function EnquiryPopup() {
 
     try {
       const response = await fetch("/api/lead", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: formData.name,
-          phone: formData.phone,
-          email: formData.email,
-          requirement: formData.requirement,
-          source: "Enquiry Popup",
-        }),
-      });
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    name: formData.name,
+    phone: formData.phone,
+    email: formData.email,
+    requirement: formData.requirement,
+    source: "Enquiry Popup",
+  }),
+});
 
       if (response.ok) {
         // Save timestamp
