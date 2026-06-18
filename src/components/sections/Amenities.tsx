@@ -1,46 +1,3 @@
-// import Container from "../ui/Container";
-// import SectionTitle from "../ui/SectionTitle";
-
-// const amenities = [
-//   "Clubhouse",
-//   "Swimming Pool",
-//   "Kids Zone",
-//   "Senior Citizen Features",
-//   "Indoor Games",
-//   "Lifestyle Amenities",
-//   "Dedicated Parking",
-//   "Prime Road Access",
-//   "Premium Community Living",
-//   "Commercial Convenience",
-// ];
-
-// export default function Amenities() {
-//   return (
-//     <section className="bg-slate-950 py-20 text-white">
-//       <Container>
-//         <SectionTitle
-//           eyebrow="Lifestyle & Amenities"
-//           title="Designed for comfort, leisure, and everyday convenience"
-//           description="A balanced mix of lifestyle features makes Ultimate Heights attractive for modern families seeking both comfort and connectivity."
-//         />
-
-//         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-//           {amenities.map((item) => (
-//             <div
-//               key={item}
-//               className="rounded-2xl border border-white/10 bg-white/5 p-5 text-center text-sm font-medium text-slate-100 backdrop-blur"
-//             >
-//               {item}
-//             </div>
-//           ))}
-//         </div>
-//       </Container>
-//     </section>
-//   );
-// }
-
-
-
 
 
 "use client";
@@ -65,7 +22,7 @@ const amenities = [
 
 export default function Amenities() {
   return (
-    <section className="relative bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 py-24 overflow-hidden">
+    <section  id="amenities" className="relative bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 py-24 overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 1px)", backgroundSize: "40px 40px" }} />

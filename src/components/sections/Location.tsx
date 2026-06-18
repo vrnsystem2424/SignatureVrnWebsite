@@ -3,7 +3,7 @@ import SectionTitle from "../ui/SectionTitle";
 
 export default function Location() {
   return (
-    <section className="bg-white py-20">
+    <section className="bg-white py-12 lg:py-20">
       <Container>
         <SectionTitle
           eyebrow="Location Advantage"
@@ -11,8 +11,8 @@ export default function Location() {
           description="Ultimate Heights is positioned on main road connectivity near established social infrastructure and key city movement corridors."
         />
 
-        <div className="grid gap-6 lg:grid-cols-2">
-          <div className="rounded-3xl bg-slate-50 p-8">
+        <div className="grid gap-6 lg:grid-cols-2 mt-8 lg:mt-12">
+          <div className="rounded-3xl bg-slate-50 p-6 lg:p-8 border-2 border-slate-200">
             <h3 className="text-xl font-semibold text-slate-900">Nearby Landmarks</h3>
             <div className="mt-6 space-y-4 text-slate-700">
               <p><strong>Address:</strong> Aura Mall, Behind Indus Empire, Bawadiya Kalan, Near Shahpura, Bhopal</p>
@@ -24,7 +24,7 @@ export default function Location() {
             </div>
           </div>
 
-          <div className="rounded-3xl border border-slate-200 p-8">
+          <div className="rounded-3xl border-2 border-slate-200 p-6 lg:p-8">
             <h3 className="text-xl font-semibold text-slate-900">Estimated Travel Time</h3>
             <div className="mt-6 overflow-hidden rounded-2xl border border-slate-200">
               <table className="w-full text-left">

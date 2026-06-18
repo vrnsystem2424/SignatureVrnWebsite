@@ -17,10 +17,10 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: "Home", href: "/" },
+    // { name: "Home", href: "/" },
     { name: "Amenities", href: "#amenities" },
     { name: "Gallery", href: "#gallery" },
-    { name: "Location", href: "#location" },
+    // { name: "Location", href: "#location" },
     { name: "Contact", href: "#enquire" },
   ];
 
@@ -94,7 +94,7 @@ export default function Navbar() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden z-20 text-white p-2"
+              className="md:hidden z-20  p-2"
               aria-label="Toggle menu"
             >
               <div className="w-6 h-5 flex flex-col justify-between">
@@ -119,46 +119,48 @@ export default function Navbar() {
         </Container>
       </nav>
 
+      
       {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, x: "100%" }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: "100%" }}
-            transition={{ type: "tween", duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-slate-950/98 backdrop-blur-md md:hidden"
+<AnimatePresence>
+  {isMobileMenuOpen && (
+    <motion.div
+      initial={{ opacity: 0, x: "100%" }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: "100%" }}
+      transition={{ type: "tween", duration: 0.3 }}
+      className="fixed inset-0 z-40 bg-slate-950 md:hidden"
+      //          ✅ Removed /98 opacity and backdrop-blur
+    >
+      <div className="flex flex-col items-center justify-center min-h-screen gap-6 p-6">
+        {navLinks.map((link, idx) => (
+          <motion.a
+            key={idx}
+            href={link.href}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: idx * 0.1 }}
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToSection(link.href);
+            }}
+            className="text-white text-2xl font-semibold hover:text-amber-500 transition-colors"
           >
-            <div className="flex flex-col items-center justify-center min-h-screen gap-6 p-6">
-              {navLinks.map((link, idx) => (
-                <motion.a
-                  key={idx}
-                  href={link.href}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: idx * 0.1 }}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection(link.href);
-                  }}
-                  className="text-white text-2xl font-semibold hover:text-amber-500 transition-colors"
-                >
-                  {link.name}
-                </motion.a>
-              ))}
-              <motion.button
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-                onClick={openEnquiryPopup}
-                className="bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 px-8 py-3 rounded-full font-semibold text-lg hover:scale-105 transition-transform mt-4 cursor-pointer"
-              >
-                Enquire Now
-              </motion.button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            {link.name}
+          </motion.a>
+        ))}
+        <motion.button
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          onClick={openEnquiryPopup}
+          className="bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 px-8 py-3 rounded-full font-semibold text-lg hover:scale-105 transition-transform mt-4 cursor-pointer"
+        >
+          Enquire Now
+        </motion.button>
+      </div>
+    </motion.div>
+  )}
+</AnimatePresence>
     </>
   );
 }

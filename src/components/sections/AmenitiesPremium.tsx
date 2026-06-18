@@ -19,7 +19,7 @@ const amenities = [
 
 export default function AmenitiesPremium() {
   return (
-    <section className="py-24 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
+    <section id="amenities" className="py-24 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
       <Container>
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 rounded-full bg-amber-500/20 px-4 py-2 mb-4 backdrop-blur-sm">

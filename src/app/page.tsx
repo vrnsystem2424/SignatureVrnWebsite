@@ -1,4 +1,5 @@
 import Hero from "../components/sections/Hero";
+import Highlights from "../components/sections/Highlights";
 import WhyChooseUs from "../components/sections/WhyChooseUs";
 import AmenitiesPremium from "../components/sections/AmenitiesPremium";
 import Inventory from "../components/sections/Inventory";
@@ -11,6 +12,7 @@ export default function Home() {
   return (
     <main className="bg-white">
       <Hero />
+      <Highlights/>
       <WhyChooseUs />
       <AmenitiesPremium />
       <Inventory />

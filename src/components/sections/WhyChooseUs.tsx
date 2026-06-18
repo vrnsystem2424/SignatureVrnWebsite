@@ -104,13 +104,13 @@ export default function WhyChooseUs() {
         </div>
 
         {/* Stats Banner */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ delay: 0.6 }}
           className="mt-16 bg-gradient-to-r from-slate-900 to-slate-800 rounded-3xl p-8 text-white"
         >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
               <p className="text-3xl md:text-4xl font-bold text-amber-400">96.3%</p>
               <p className="text-sm text-slate-300 mt-1">Inventory Sold</p>
@@ -127,8 +127,8 @@ export default function WhyChooseUs() {
               <p className="text-3xl md:text-4xl font-bold text-amber-400">20+</p>
               <p className="text-sm text-slate-300 mt-1">Amenities</p>
             </div>
-          </div>
-        </motion.div>
+          </div> */} 
+        {/* </motion.div> */}
       </Container>
     </section>
   );

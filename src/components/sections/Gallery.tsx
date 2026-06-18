@@ -1,50 +1,3 @@
-// import Image from "next/image";
-// import Container from "../ui/Container";
-// import SectionTitle from "../ui/SectionTitle";
-
-// export default function Gallery() {
-//   return (
-//     <section className="bg-slate-50 py-20">
-//       <Container>
-//         <SectionTitle
-//           eyebrow="Gallery"
-//           title="Visual glimpse of the project lifestyle"
-//           description="Use naturally lit exterior and interior imagery to establish trust and premium appeal for ad traffic."
-//         />
-
-//         <div className="grid gap-6 lg:grid-cols-2">
-//           <div className="relative min-h-[340px] overflow-hidden rounded-3xl">
-//             {/* YAHAN PEHLE SE RELATIVE THA, BUT INNER DIV ADD KARO */}
-//             <div className="relative w-full h-full">
-//               <Image
-//                 src="/images/exterior.jpg"
-//                 alt="Ultimate Heights exterior view"
-//                 fill
-//                 className="object-cover"
-//               />
-//             </div>
-//           </div>
-
-//           <div className="relative min-h-[340px] overflow-hidden rounded-3xl">
-//             <div className="relative w-full h-full">
-//               <Image
-//                 src="/images/living-room.jpg"
-//                 alt="Ultimate Heights premium living room"
-//                 fill
-//                 className="object-cover"
-//               />
-//             </div>
-//           </div>
-//         </div>
-//       </Container>
-//     </section>
-//   );
-// }
-
-
-
-
-
 "use client";
 
 import { useState } from "react";
@@ -55,18 +8,16 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const galleryImages = [
   { src: "/images/exterior.jpg", title: "Magnificent Exterior", category: "Exterior" },
-  { src: "/images/living-room.jpg", title: "Premium Living Room", category: "Interior" },
-  { src: "/images/gallery-1.jpg", title: "Modern Kitchen", category: "Interior" },
-  { src: "/images/gallery-2.jpg", title: "Luxury Bedroom", category: "Interior" },
+  { src: "/images/living-room.jpg", title: "Premium Living Room",  },
+  { src: "/images/image-3.png", title: "Swimming Pool",  },
+  { src: "/images/Image-2.png", title: "Parking",  },
 ];
 
 export default function Gallery() {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
-  // Agar extra images chahiye to ye batao, main download karne ka link dunga
-
   return (
-    <section id="gallery" className="py-24 bg-white">
+    <section id="gallery" className="py-12 lg:py-24 bg-white">
       <Container>
         <SectionTitle
           eyebrow="Our Gallery"
@@ -74,7 +25,7 @@ export default function Gallery() {
           description="Step into the world of luxury and elegance"
         />
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-6 mt-6 lg:mt-12">
           {galleryImages.map((image, idx) => (
             <motion.div
               key={idx}
@@ -85,7 +36,7 @@ export default function Gallery() {
               className="group cursor-pointer"
               onClick={() => setSelectedImage(idx)}
             >
-              <div className="relative h-72 overflow-hidden rounded-2xl">
+              <div className="relative h-48 lg:h-72 overflow-hidden rounded-2xl">
                 <div className="relative w-full h-full">
                   <Image
                     src={image.src}
@@ -94,12 +45,12 @@ export default function Gallery() {
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform">
-                  <p className="text-white font-semibold">{image.title}</p>
-                  <p className="text-amber-400 text-sm">{image.category}</p>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity" />
+                <div className="absolute bottom-0 left-0 right-0 p-3 lg:p-4 lg:transform lg:translate-y-full lg:group-hover:translate-y-0 transition-transform">
+                  <p className="text-white font-semibold text-xs lg:text-base">{image.title}</p>
+                  <p className="text-amber-400 text-[10px] lg:text-sm">{image.category}</p>
                 </div>
-                <div className="absolute top-4 right-4 bg-amber-500 rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="absolute top-4 right-4 bg-amber-500 rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity hidden lg:block">
                   <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
                   </svg>
