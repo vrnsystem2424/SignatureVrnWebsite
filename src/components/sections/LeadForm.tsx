@@ -15,47 +15,46 @@ export default function LeadForm() {
     message: "",
   });
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+ const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setIsSubmitting(true);
 
-    try {
-      const response = await fetch("/api/lead", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: formData.name,
-          phone: formData.phone,
-          email: formData.email,
-          requirement: formData.requirement,
-          message: formData.message,
-          source: "Lead Form (Enquire Section)",
-        }),
-      });
+  try {
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxLyME_VTWheBcDSzZqDApGghlm1nHRMKxe2c6kmXG0-bGvl04GccPxHAvHvCJxjgCXmg/exec";
 
-      if (response.ok) {
-        setIsSuccess(true);
-        setFormData({
-          name: "",
-          phone: "",
-          email: "",
-          requirement: "",
-          message: "",
-        });
+    const params = new URLSearchParams({
+      name: formData.name,
+      phone: formData.phone,
+      email: formData.email,
+      requirement: formData.requirement,
+      message: formData.message,
+      source: "Lead Form (Enquire Section)",
+    });
 
-        // Auto-hide success after 6 seconds
-        setTimeout(() => setIsSuccess(false), 6000);
-      } else {
-        alert("❌ Something went wrong. Please try again.");
-      }
-    } catch (error) {
-      console.error("Submit error:", error);
-      alert("❌ Network error. Please try again.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+    await fetch(`${GOOGLE_SCRIPT_URL}?${params.toString()}`, {
+      method: "GET",
+      mode: "no-cors",
+    });
 
+    setIsSuccess(true);
+    setFormData({
+      name: "",
+      phone: "",
+      email: "",
+      requirement: "",
+      message: "",
+    });
+
+    // Auto-hide success after 6 seconds
+    setTimeout(() => setIsSuccess(false), 6000);
+
+  } catch (error) {
+    console.error("Submit error:", error);
+    alert("❌ Network error. Please try again.");
+  } finally {
+    setIsSubmitting(false);
+  }
+};
   return (
     <section id="enquire" className="bg-white py-12 lg:py-20">
       <Container>

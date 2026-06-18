@@ -428,41 +428,35 @@ export default function Hero() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+ const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setIsSubmitting(true);
 
-    try {
-      // ✅ Send to Google Sheets via API route
-      const response = await fetch("/api/lead", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: formData.name,
-          phone: formData.phone,
-          requirement: formData.requirement,
-          source: "Hero Form",
-        }),
-      });
+  try {
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxLyME_VTWheBcDSzZqDApGghlm1nHRMKxe2c6kmXG0-bGvl04GccPxHAvHvCJxjgCXmg/exec";
 
-      if (response.ok) {
-        // Also open WhatsApp with details
-        const message = `Name: ${formData.name}\nPhone: ${formData.phone}\nRequirement: ${formData.requirement}`;
-       
+    const params = new URLSearchParams({
+      name: formData.name,
+      phone: formData.phone,
+      requirement: formData.requirement,
+      source: "Hero Form",
+    });
 
-        alert("✅ Thank you! Our team will contact you shortly.");
-        setFormData({ name: "", phone: "", requirement: "" });
-      } else {
-        alert("❌ Something went wrong. Please try again.");
-      }
-    } catch (error) {
-      console.error("Submit error:", error);
-      alert("❌ Network error. Please try again.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+    await fetch(`${GOOGLE_SCRIPT_URL}?${params.toString()}`, {
+      method: "GET",
+      mode: "no-cors",
+    });
 
+    alert("✅ Thank you! Our team will contact you shortly.");
+    setFormData({ name: "", phone: "", requirement: "" });
+
+  } catch (error) {
+    console.error("Submit error:", error);
+    alert("❌ Network error. Please try again.");
+  } finally {
+    setIsSubmitting(false);
+  }
+};
   // Open enquiry popup
   const openEnquiryPopup = () => {
     if ((window as any).openEnquiryPopup) {
