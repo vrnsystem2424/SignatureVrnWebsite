@@ -33,4 +33,4 @@ jobs:
           server-dir: /public_html/   # ✅ Hostinger ka folder
           protocol: ftps   # ✅ Try ftps first
           port: 21
-          timeout: 60000   # ✅ Timeout badhao
+          timeout: 60000    
