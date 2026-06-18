@@ -28,13 +28,11 @@
 // }
 
 
-
-
 // app/api/lead/route.ts
 
 import { NextRequest, NextResponse } from "next/server";
 
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw5tvuoUbaX6r_kF6QIQJT2s9kq0rFM6VIrhcZ2ObTLHgtTS5dvJh2tnkqHAzYfLwcqWA/exec";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxLyME_VTWheBcDSzZqDApGghlm1nHRMKxe2c6kmXG0-bGvl04GccPxHAvHvCJxjgCXmg/exec";
 
 export async function POST(request: NextRequest) {
   try {
@@ -61,8 +59,8 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ success: true });
 
-  } catch (error) {
-    console.error("API Error:", error);
+  } catch (error: any) {
+    console.error("API Error:", error?.message);
     return NextResponse.json(
       { success: false, error: "Failed to submit" },
       { status: 500 }
