@@ -207,40 +207,40 @@ export default function EnquiryPopup() {
     };
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+ const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setIsSubmitting(true);
 
-    try {
-      const response = await fetch("/api/lead", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({
-    name: formData.name,
-    phone: formData.phone,
-    email: formData.email,
-    requirement: formData.requirement,
-    source: "Enquiry Popup",
-  }),
-});
+  try {
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxLyME_VTWheBcDSzZqDApGghlm1nHRMKxe2c6kmXG0-bGvl04GccPxHAvHvCJxjgCXmg/exec";
 
-      if (response.ok) {
-        // Save timestamp
-        localStorage.setItem("enquirySubmittedAt", Date.now().toString());
+    const params = new URLSearchParams({
+      name: formData.name,
+      phone: formData.phone,
+      email: formData.email,
+      requirement: formData.requirement,
+      source: "Enquiry Popup",
+      timestamp: new Date().toISOString(),
+    });
 
-        // ✅ Show success screen instead of alert + WhatsApp
-        setIsSuccess(true);
-        setFormData({ name: "", phone: "", email: "", requirement: "" });
-      } else {
-        alert("❌ Something went wrong. Please try again.");
-      }
-    } catch (error) {
-      console.error("Submit error:", error);
-      alert("❌ Network error. Please try again.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+    // ✅ Direct Google Script call - No API route
+    await fetch(`${GOOGLE_SCRIPT_URL}?${params.toString()}`, {
+      method: "GET",
+      mode: "no-cors",
+    });
+
+    // ✅ no-cors mein response check nahi hota, direct success
+    localStorage.setItem("enquirySubmittedAt", Date.now().toString());
+    setIsSuccess(true);
+    setFormData({ name: "", phone: "", email: "", requirement: "" });
+
+  } catch (error) {
+    console.error("Submit error:", error);
+    alert("❌ Network error. Please try again.");
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   const handleClose = () => {
     setIsOpen(false);
