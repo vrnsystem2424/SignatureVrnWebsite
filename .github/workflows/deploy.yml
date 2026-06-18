@@ -1,38 +1,36 @@
+# .github/workflows/deploy.yml
+
 name: Deploy to Hostinger
 
 on:
   push:
-    branches:
-      - master
-  workflow_dispatch:
+    branches: [main]
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
-    
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '20'
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: npm install
 
-      - name: Build Next.js site
+      - name: Build
         run: npm run build
 
-      - name: Deploy to Hostinger via FTP
+      - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: ${{ secrets.FTP_SERVER_DIR }}
-          local-dir: ./out/
-          protocol: ftps
+          local-dir: ./out/   # ✅ static export folder
+          server-dir: /public_html/   # ✅ Hostinger ka folder
+          protocol: ftps   # ✅ Try ftps first
           port: 21
-          timeout: 120000
+          timeout: 60000   # ✅ Timeout badhao
