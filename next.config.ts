@@ -1,11 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: 'export',
+  output: "export",
+  trailingSlash: false,   // ✅ false कर दो — URL में / नहीं आएगा
   images: {
     unoptimized: true,
+    qualities: [75, 90, 100],
   },
-  trailingSlash: false,
 };
 
 export default nextConfig;
