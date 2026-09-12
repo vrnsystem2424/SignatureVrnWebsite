@@ -282,13 +282,17 @@
 
 
 
-
-
 export const paradiseData = {
   projectName: "Signature Paradise",
   tagline: "A Premium River View Township In Bhopal",
   phone: "+919999999999",
   whatsappNumber: "919999999999",
+
+  // Added contact object to prevent Vercel type error
+  contact: {
+    phone: "+919999999999",
+    whatsapp: "919999999999",
+  },
 
   hero: {
     eyebrow: "Looking For A Plot In Bhopal?",
@@ -447,7 +451,7 @@ export const paradiseData = {
     logo: "/images/paradise/Logo.jpeg",
   },
 
-  // ✅ ADDED MISSING GALLERY ARRAY FOR TS TYPE CHECKING
+  // Added gallery array for TS checking
   gallery: [
     {
       title: "Grand Entrance View",

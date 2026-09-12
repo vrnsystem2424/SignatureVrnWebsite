@@ -1,230 +1,9 @@
-
-
-
-
-// export const siteConfig = {
-//   projectName: "Signature Heritage",
-//   tagline: "Where Royal Living Meets Modern Address",
-//   location: "Kolar Road, Bhopal",
-//   phone: "+919999999999", // TODO: replace with real number
-//   whatsappNumber: "919999999999", // digits only for wa.me links
-//   email: "info@signatureheritage.in",
-//   brochureUrl: "/images/signatureheritage/signature%20heritage%20brochure%20SALES.pdf",
-//   mapEmbedUrl:
-//     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d234567.123!2d77.3833!3d23.2000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDEyJzAwLjAiTiA3N8KwMjMnMDAuMCJF!5e0!3m2!1sen!2sin!4v1700000000000",
-// };
-
-// export type NavLink = {
-//   label: string;
-//   href: string;
-//   children?: { label: string; href: string }[];
-// };
-
-// export const navLinks: NavLink[] = [
-//   { label: "Home", href: "#home" },
-//   {
-//     label: "Overview",
-//     href: "#overview",
-//     children: [
-//       { label: "Statement of Area", href: "#overview" },
-//       { label: "Master Plan", href: "#overview" },
-//     ],
-//   },
-//   { label: "Amenities", href: "#amenities" },
-//   { label: "Gallery", href: "#gallery" },
-//   {
-//     label: "Location",
-//     href: "#location",
-//     children: [
-//       { label: "Map & Distances", href: "#location" },
-//       { label: "Nearby Landmarks", href: "#location" },
-//     ],
-//   },
-//   { label: "Contact Us", href: "#contact" },
-// ];
-
-// export const heroContent = {
-//   backgroundImage: "/images/signatureheritage/6%20DUPLEX%20ELEVATION.jpg",
-//   eyebrow: "Premium Residential Plots & Commercial Plaza",
-//   headlineLines: ["SIGNATURE", "HERITAGE"],
-//   subheadline: "YOUR SIGNATURE ADDRESS ON KOLAR ROAD, BHOPAL",
-//   supportingLine:
-//     "Royal architecture. A resort-style clubhouse. A commercial plaza at your doorstep.",
-//   ctaPrimary: {
-//     label: "Download Brochure",
-//     href: "/images/signatureheritage/signature%20heritage%20brochure%20SALES.pdf",
-//   },
-//   ctaSecondary: {
-//     label: "Book Site Visit",
-//     href: "#contact",
-//   },
-// };
-
-// export const overviewStats = [
-//   { id: "area", label: "Total Project Area", value: "45254", unit: "Sq.Ft." },
-//   { id: "clubhouse", label: "Clubhouse Area", value: "2281", unit: "Sq.Ft." },
-//   { id: "pool", label: "Swimming Pool", value: "1390", unit: "Sq.Ft." },
-//   { id: "possession", label: "RERA Approved", value: "100%", unit: "Legal & Clear Titles" },
-// ];
-
-// export const overviewContent = {
-//   eyebrow: "The Statement of Area",
-//   title: "A Legacy Address, Thoughtfully Planned",
-//   description:
-//     "Signature Heritage is a meticulously master-planned gated community on Kolar Road, Bhopal — one of the city's fastest-appreciating micro-markets.",
-//   highlights: [
-//     "Gated community with 24x7 security & CCTV surveillance",
-//     "Wide internal roads with avenue plantation",
-//     "Underground electrification & storm water drainage",
-//     "Dedicated commercial plaza for daily conveniences",
-//   ],
-// };
-
-// export type Amenity = {
-//   id: string;
-//   icon: string;
-//   title: string;
-//   description: string;
-// };
-
-// export const amenities: Amenity[] = [
-//   { id: "clubhouse", icon: "🏛️", title: "Royal Clubhouse", description: "A 2281 sq.ft. clubhouse designed for community gatherings, celebrations & leisure." },
-//   { id: "pool", icon: "🏊", title: "Swimming Pool", description: "A resort-style 1390 sq.ft. pool for relaxed evenings and weekend luxury." },
-//   { id: "garden", icon: "🌳", title: "Landscaped Gardens", description: "Lush green pockets and jogging paths woven through the entire community." },
-//   { id: "security", icon: "🛡️", title: "24x7 Security", description: "Gated entry, boundary walls, and round-the-clock manned security for total peace of mind." },
-//   { id: "commercial", icon: "🏬", title: "Commercial Plaza", description: "An in-community retail plaza for everyday needs, right at your doorstep." },
-//   { id: "kids", icon: "🎠", title: "Kids' Play Area", description: "A dedicated, safe play zone for children within the gated premises." },
-//   { id: "power", icon: "⚡", title: "Underground Electrification", description: "Clean streetscapes with fully underground power & utility lines." },
-//   { id: "roads", icon: "🛣️", title: "Wide Avenue Roads", description: "Broad, well-lit internal roads designed for smooth movement and grandeur." },
-// ];
-
-// export type GalleryImage = {
-//   id: number;
-//   title: string;
-//   category: string;
-//   src: string;
-//   alt: string;
-// };
-
-// export const galleryImages: GalleryImage[] = [
-//   { id: 1, title: "Grand Entry Gate", category: "Exterior", src: "/images/signatureheritage/2%20ENTRY%20GATE.jpg", alt: "Signature Heritage Grand Entrance Gate" },
-//   { id: 2, title: "Resort-Style Clubhouse", category: "Amenities", src: "/images/signatureheritage/3%20CLUB%20HOUSE%20ELEVATION.jpg", alt: "Clubhouse Elevation" },
-//   { id: 3, title: "Clubhouse Swimming Pool", category: "Amenities", src: "/images/signatureheritage/4%20CLUB%20HOUSE%20POOL.jpg", alt: "Swimming Pool Area" },
-//   { id: 4, title: "Royal Duplex Villa Elevation", category: "Exterior", src: "/images/signatureheritage/6%20DUPLEX%20ELEVATION.jpg", alt: "Duplex Elevation View" },
-//   { id: 5, title: "Scenic Temple View", category: "Temple", src: "/images/signatureheritage/10%20TEMPLE%20VIEW.jpg", alt: "Grand Temple View" },
-//   { id: 6, title: "Temple Elevation", category: "Temple", src: "/images/signatureheritage/7%20TEMPLE%20ELEVATION.jpg", alt: "Temple Architecture" },
-//   { id: 7, title: "Lush Green Landscaped Garden", category: "Amenities", src: "/images/signatureheritage/5%20GARDEN.jpg", alt: "Garden Area" },
-//   { id: 8, title: "Luxury Drawing Room", category: "Interior", src: "/images/signatureheritage/11%20Drawing%20room%20%20(1).jpg", alt: "Drawing Room Interior" },
-//   { id: 9, title: "Spacious Living Area", category: "Interior", src: "/images/signatureheritage/12%20Drawing%20room%20%20(2).jpg", alt: "Living Room Interior" },
-//   { id: 10, title: "Elegant Dining Space", category: "Interior", src: "/images/signatureheritage/16%20Dining%20(2).jpg", alt: "Dining Area" },
-// ];
-
-// export type Landmark = {
-//   id: string;
-//   name: string;
-//   distance: string;
-//   category: string;
-// };
-
-// export const nearbyLandmarks: Landmark[] = [
-//   { id: "aiims", name: "AIIMS Bhopal", distance: "8.5 km", category: "Healthcare" },
-//   { id: "shahpura", name: "Shahpura Lake", distance: "6 km", category: "Leisure" },
-//   { id: "aura-mall", name: "Aura Mall", distance: "9 km", category: "Shopping" },
-//   { id: "kolar-road", name: "Kolar Road Main Junction", distance: "1.2 km", category: "Connectivity" },
-//   { id: "airport", name: "Raja Bhoj Airport", distance: "18 km", category: "Travel" },
-//   { id: "railway", name: "Habibganj Railway Station", distance: "12 km", category: "Travel" },
-// ];
-
-// export const locationContent = {
-//   eyebrow: "The Address",
-//   title: "Perfectly Positioned on Kolar Road, Bhopal",
-//   description:
-//     "Kolar Road is Bhopal's most sought-after residential corridor — well connected to the city's healthcare, education, and retail hubs, while still offering the calm of a planned, green neighbourhood.",
-// };
-
-// export const leadFormContent = {
-//   eyebrow: "Enquire Now",
-//   title: "Book Your Site Visit Today",
-//   description:
-//     "Share your details and our team will get in touch to schedule a personalised site visit at Signature Heritage.",
-//   interestOptions: [
-//     "Residential Plot",
-//     "Commercial Plaza Unit",
-//     "Investment Enquiry",
-//     "General Enquiry",
-//   ],
-// };
-
-// export const footerContent = {
-//   disclaimer:
-//     "This is not an official offer or contract of any kind. All images are for representation purposes only and are indicative of the design intent. Prices, plans, specifications, and other details are subject to change without prior notice at the sole discretion of the developer. RERA registration details will be shared on request.",
-//   address: "Signature Heritage, Kolar Road, Bhopal, Madhya Pradesh, India",
-// };
-
-// // ==========================================
-// // YAHAN MISSING `heritageData` ADD KIYA GAYA HAI:
-// // ==========================================
-// export const heritageData = {
-//   // Highlights Component ke liye (HeritageHighlights.tsx)
-//   highlights: [
-//     "Grand Entrance Gate with 24x7 Multi-Tier Security",
-//     "Resort-Style Royal Clubhouse & Swimming Pool",
-//     "Scenic Grand Temple inside the Campus",
-//     "Dedicated Commercial Plaza for Daily Conveniences",
-//     "100% Underground Electrification & Modern Drainage",
-//     "Lush Green Landscaped Gardens & Jogging Tracks",
-//     "Wide Avenue Internal Roads with Streetlights",
-//     "100% Clear Title & RERA Approved Gated Community",
-//   ],
-
-//   // Inventory Component ke liye (HeritageInventory.tsx)
-//   vacantInventory: [
-//     {
-//       type: "Royal 3 BHK Duplex",
-//       area: "1,500 - 1,800 SQ. FT.",
-//       price: "₹ 75 Lakh*",
-//       features: [
-//         "Spacious Living & Dining",
-//         "Private Terrace & Balconies",
-//         "Covered Car Parking",
-//         "Vastu Compliant Layout",
-//       ],
-//     },
-//     {
-//       type: "Imperial 4 BHK Villa",
-//       area: "2,200 - 2,600 SQ. FT.",
-//       price: "₹ 1.15 Cr*",
-//       features: [
-//         "Double Height Ceiling",
-//         "Personal Garden Space",
-//         "Servant Quarter Provision",
-//         "Premium Fixtures & Fittings",
-//       ],
-//     },
-//     {
-//       type: "Commercial Plaza Shops",
-//       area: "350 - 900 SQ. FT.",
-//       price: "₹ 45 Lakh*",
-//       features: [
-//         "Main Road Facing",
-//         "High Footfall Corridor",
-//         "Ample Visitor Parking",
-//         "Ideal for Retails & Clinics",
-//       ],
-//     },
-//   ],
-// };
-
-
-
-
-
 export const siteConfig = {
   projectName: "Signature Heritage",
   tagline: "Premium Living Designed For Modern Families",
   location: "Kolar Road, Bhopal",
-  phone: "+919999999999", // TODO: replace with real number
-  whatsappNumber: "919999999999", // digits only for wa.me links
+  phone: "+919999999999",
+  whatsappNumber: "919999999999",
   email: "info@signatureheritage.in",
   brochureUrl: "/images/signatureheritage/signature%20heritage%20brochure%20SALES.pdf",
   mapEmbedUrl:
@@ -260,10 +39,9 @@ export const navLinks: NavLink[] = [
   { label: "Contact Us", href: "#contact" },
 ];
 
-// 🟢 HERO CONTENT (Updated for Duplex)
 export const heroContent = {
   backgroundImage: "/images/signatureheritage/6%20DUPLEX%20ELEVATION.jpg",
-  eyebrow: "Looking For A Duplex In Bhopal?",
+  eyebrow: "LOOKING FOR A DUPLEX IN BHOPAL?",
   headlineLines: ["OWN YOUR DREAM DUPLEX AT", "SIGNATURE HERITAGE"],
   subheadline: "PREMIUM LIVING DESIGNED FOR MODERN FAMILIES",
   supportingLine:
@@ -305,7 +83,6 @@ export type Amenity = {
   description: string;
 };
 
-// 🟢 AMENITIES (Updated for Duplex)
 export const amenities: Amenity[] = [
   { id: "clubhouse", icon: "🏛️", title: "Luxury Club House", description: "A Premium Space For Recreation & Social Gatherings." },
   { id: "gym", icon: "🏋️", title: "Fully Equipped Gym", description: "Stay Active With Modern Fitness Facilities." },
@@ -376,13 +153,26 @@ export const footerContent = {
   disclaimer:
     "This is not an official offer or contract of any kind. All images are for representation purposes only and are indicative of the design intent. Prices, plans, specifications, and other details are subject to change without prior notice at the sole discretion of the developer. RERA registration details will be shared on request.",
   address: "Signature Heritage, Kolar Road, Bhopal, Madhya Pradesh, India",
+  popularSearches:
+    "Duplex in Bhopal | Duplex on Kolar Road Bhopal | Premium Duplex Homes Bhopal | Signature Heritage Bhopal | Signature Heritage Kolar Road | Gated Community Kolar Road Bhopal | Luxury Duplex Bhopal | 3 BHK Duplex Bhopal | 4 BHK Duplex Bhopal | Clubhouse Duplex Bhopal | Residential Plots Kolar Road | Plots in Kolar Road Bhopal | Property on Kolar Road Bhopal | Buy Duplex in Bhopal | Premium Gated Community Bhopal | Swimming Pool Community Bhopal | Family Duplex Homes Bhopal | Investment Property Kolar Road | Real Estate Kolar Road Bhopal | Duplex for Sale Bhopal | Luxury Homes Kolar Road | RERA Approved Project Bhopal | Independent Duplex Bhopal | Township Living Bhopal | Best Duplex in Bhopal | Signature Heritage Duplex | Commercial Plaza Kolar Road",
 };
 
-// ==========================================
-// 🟢 ALL NEW HERITAGE DATA ADDED HERE
-// ==========================================
+export const heritagePopularSearches = footerContent.popularSearches;
+
+// MAIN HERITAGE DATA OBJECT (Fixes all missing property crashes)
 export const heritageData = {
-  // Used in HeritageHighlights Component
+  hero: {
+    eyebrow: "LOOKING FOR A DUPLEX IN BHOPAL?",
+    title: "Own Your Dream Duplex At Signature Heritage",
+    subtitle: "PREMIUM LIVING DESIGNED FOR MODERN FAMILIES",
+    usps: [
+      "Ready Lifestyle Amenities",
+      "Premium Duplex Homes",
+      "Limited Inventory Available",
+    ],
+    image: "/images/signatureheritage/6%20DUPLEX%20ELEVATION.jpg",
+  },
+
   highlights: [
     "Premium Duplex Community",
     "Grand Entrance Experience",
@@ -392,7 +182,6 @@ export const heritageData = {
     "Excellent Connectivity",
   ],
 
-  // USP Strip (Features)
   strip: {
     features: [
       { title: "Premium Duplex Homes", desc: "Spacious Family Living" },
@@ -402,7 +191,6 @@ export const heritageData = {
     ],
   },
 
-  // Why Choose
   whyChoose: [
     {
       title: "Premium Duplex Community",
@@ -426,7 +214,6 @@ export const heritageData = {
     },
   ],
 
-  // Features & Advantages
   communityFeatures: [
     "Duplex Homes Starting From 1356 Sq.ft",
     "Plot Sizes From 765 Sq.ft Onwards",
@@ -517,7 +304,8 @@ export const heritageData = {
     },
   ],
 
-  // Used in HeritageInventory Component
+  amenities: amenities,
+
   vacantInventory: [
     {
       type: "Premium 3 BHK Duplex",

@@ -1,5 +1,7 @@
 "use client";
-import { useState } from "react";
+
+import React, { useState } from "react";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { paradiseData } from "../../data/paradise";
 
 export default function ParadiseLeadForm() {
@@ -7,100 +9,160 @@ export default function ParadiseLeadForm() {
     name: "",
     phone: "",
     email: "",
-    interest: "",
-    message: "",
+    city: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const msg = `New Enquiry - Paradise%0A%0AName: ${formData.name}%0APhone: ${formData.phone}%0AEmail: ${formData.email}%0AInterested In: ${formData.interest}%0AMessage: ${formData.message}`;
-    window.open(`https://wa.me/${paradiseData.contact.whatsapp}?text=${msg}`, "_blank");
+    if (!formData.name.trim() || !formData.phone.trim()) return;
+
+    setIsSubmitting(true);
+
+    // ✅ Clean number for WhatsApp without touching .contact
+    const waNumber =
+      paradiseData.whatsappNumber ||
+      paradiseData.phone?.replace(/[^0-9]/g, "") ||
+      "919999999999";
+
+    const msg = `New Enquiry - Signature Paradise%0A%0AName: ${encodeURIComponent(
+      formData.name
+    )}%0APhone: ${encodeURIComponent(
+      formData.phone
+    )}%0AEmail: ${encodeURIComponent(
+      formData.email
+    )}%0ACity: ${encodeURIComponent(formData.city)}`;
+
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      setSubmitted(true);
+      window.open(`https://wa.me/${waNumber}?text=${msg}`, "_blank");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
-    <section id="lead-form" className="py-20 bg-gradient-to-br from-slate-900 to-emerald-950 text-white">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Left Content */}
-          <div>
-            <p className="text-emerald-400 text-sm font-bold uppercase tracking-widest mb-3">
-              Enquire Now
-            </p>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Book Your Site Visit Today
+    <section id="contact-form" className="py-16 sm:py-24 bg-white overflow-hidden">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-[#FAFAFA] rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-xl relative overflow-hidden">
+          
+          <div className="text-center max-w-xl mx-auto mb-8">
+            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 bg-emerald-50 border border-emerald-100 px-3 py-1.5 rounded-full inline-block mb-3">
+              Book Your Site Visit
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-serif font-bold text-slate-900">
+              Get In Touch With <span className="text-emerald-700">Signature Paradise</span>
             </h2>
-            <p className="text-slate-300 mb-8">
-              Our sales team will contact you within 30 minutes with pricing, availability and site visit coordination.
+            <p className="mt-2 text-xs sm:text-sm text-slate-500">
+              Fill in your details below and our team will get back to you shortly.
             </p>
-
-            <div className="grid grid-cols-2 gap-4 mb-8">
-              <div className="bg-white/5 border border-white/10 rounded-xl p-4">
-                <p className="text-xs text-slate-400 uppercase">Project</p>
-                <p className="text-lg font-bold">{paradiseData.name}</p>
-              </div>
-              <div className="bg-white/5 border border-white/10 rounded-xl p-4">
-                <p className="text-xs text-slate-400 uppercase">Availability</p>
-                <p className="text-lg font-bold text-emerald-400">Only {paradiseData.stats.flatsVacant} Left</p>
-              </div>
-            </div>
-
-            <div className="space-y-3 text-sm">
-              <p>📞 {paradiseData.contact.phone}</p>
-              <p>✉️ {paradiseData.contact.email}</p>
-            </div>
           </div>
 
-          {/* Form */}
-          <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-8 text-slate-900 space-y-4">
-            <input
-              type="text"
-              required
-              placeholder="Full Name"
-              value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="w-full px-4 py-3 border border-slate-200 rounded-lg focus:border-emerald-500 focus:outline-none"
-            />
-            <input
-              type="tel"
-              required
-              placeholder="Phone Number"
-              value={formData.phone}
-              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-              className="w-full px-4 py-3 border border-slate-200 rounded-lg focus:border-emerald-500 focus:outline-none"
-            />
-            <input
-              type="email"
-              placeholder="Email Address"
-              value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              className="w-full px-4 py-3 border border-slate-200 rounded-lg focus:border-emerald-500 focus:outline-none"
-            />
-            <select
-              required
-              value={formData.interest}
-              onChange={(e) => setFormData({ ...formData, interest: e.target.value })}
-              className="w-full px-4 py-3 border border-slate-200 rounded-lg focus:border-emerald-500 focus:outline-none"
-            >
-              <option value="">Interested In</option>
-              <option value="2 BHK">2 BHK</option>
-              <option value="3 BHK">3 BHK</option>
-              <option value="3 BHK Premium">3 BHK Premium</option>
-              <option value="Penthouse">Penthouse</option>
-            </select>
-            <textarea
-              placeholder="Message (Optional)"
-              rows={3}
-              value={formData.message}
-              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-              className="w-full px-4 py-3 border border-slate-200 rounded-lg focus:border-emerald-500 focus:outline-none"
-            />
-            <button
-              type="submit"
-              className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-4 rounded-lg font-bold text-lg transition"
-            >
-              Send Enquiry →
-            </button>
-          </form>
+          {submitted ? (
+            <div className="text-center py-10">
+              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-emerald-50 border border-emerald-100">
+                <CheckCircle2 className="w-7 h-7 text-emerald-600" />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-2">Thank You!</h3>
+              <p className="text-sm text-slate-600">
+                Your enquiry has been received. Redirecting to WhatsApp...
+              </p>
+              <button
+                type="button"
+                onClick={() => {
+                  setSubmitted(false);
+                  setFormData({ name: "", phone: "", email: "", city: "" });
+                }}
+                className="mt-5 text-xs font-bold uppercase tracking-wider text-emerald-700 underline underline-offset-4"
+              >
+                Submit Another Request
+              </button>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="mb-1 block text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-slate-500">
+                  Full Name *
+                </label>
+                <input
+                  name="name"
+                  type="text"
+                  required
+                  value={formData.name}
+                  onChange={handleChange}
+                  placeholder="Enter your full name"
+                  className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10"
+                />
+              </div>
+
+              <div>
+                <label className="mb-1 block text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-slate-500">
+                  Mobile Number *
+                </label>
+                <input
+                  name="phone"
+                  type="tel"
+                  required
+                  maxLength={10}
+                  value={formData.phone}
+                  onChange={handleChange}
+                  placeholder="10-digit mobile number"
+                  className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10"
+                />
+              </div>
+
+              <div>
+                <label className="mb-1 block text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-slate-500">
+                  Email ID
+                </label>
+                <input
+                  name="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="you@example.com"
+                  className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10"
+                />
+              </div>
+
+              <div>
+                <label className="mb-1 block text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-slate-500">
+                  City Name
+                </label>
+                <input
+                  name="city"
+                  type="text"
+                  value={formData.city}
+                  onChange={handleChange}
+                  placeholder="e.g. Bhopal"
+                  className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10"
+                />
+              </div>
+
+              <div className="sm:col-span-2 mt-2">
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs sm:text-sm uppercase tracking-wider py-4 shadow-lg shadow-emerald-700/20 active:scale-[0.98] transition-all disabled:opacity-70"
+                >
+                  {isSubmitting ? (
+                    "Submitting..."
+                  ) : (
+                    <>
+                      Submit Request <ArrowRight className="w-4 h-4" />
+                    </>
+                  )}
+                </button>
+              </div>
+            </form>
+          )}
+
         </div>
       </div>
     </section>
