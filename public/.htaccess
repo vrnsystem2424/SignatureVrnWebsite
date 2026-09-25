@@ -1,16 +1,16 @@
-# Set index.html as default
 DirectoryIndex index.html
 
-# Enable rewriting
 RewriteEngine On
+RewriteBase /
 
-# Handle Next.js routing - try file, then folder/index.html, then 404
-RewriteRule ^([^.]+[^/])$ $1/ [L,R=301]
-
-# Serve index.html for clean URLs
-RewriteCond %{REQUEST_FILENAME} !-f
+# 1. अगर URL के अंत में / है तो उसे हटाओ (redirect /ultimateheight/ to /ultimateheight)
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.+)$ /$1.html [L]
+RewriteCond %{REQUEST_URI} (.+)/$
+RewriteRule ^ %1 [L,R=301]
+
+# 2. Clean URL को .html फ़ाइल से जोड़ो (/ultimateheight -> /ultimateheight.html)
+RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+RewriteRule ^(.*)$ $1.html [L]
 
 # Custom 404 page
 ErrorDocument 404 /404.html
