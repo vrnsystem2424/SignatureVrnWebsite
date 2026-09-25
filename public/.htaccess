@@ -27,23 +27,28 @@
 
 
 
+
 DirectoryIndex index.html
 
 RewriteEngine On
 RewriteBase /
 
-# 1. अगर डायरेक्ट फ़ाइल (Images, CSS, JS) है तो सीधे लोड करो
-RewriteCond %{REQUEST_FILENAME} -f
-RewriteRule ^ - [L]
+# 1. सिक्योरिटी के लिए फ़ोल्डर लिस्टिंग बंद करें
+Options -Indexes
 
-# 2. अगर URL के आख़िर में / लगा है तो उसे हटाकर Redirect करो (/signatureheritage/ -> /signatureheritage)
+# 2. अगर कोई URL के आख़िर में / टाइप करे तो उसे बिना / पर redirect करें (/paradise/ -> /paradise)
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI} ^(.+)/$
 RewriteRule ^ %1 [L,R=301]
 
-# 3. Clean URL (/signatureheritage) को signatureheritage.html फ़ाइल से जोड़ो
+# 3. Clean URL (/paradise) को paradise.html फ़ाइल से चलाएं
 RewriteCond %{DOCUMENT_ROOT}/$1.html -f
 RewriteRule ^(.*)$ $1.html [L]
+
+# 4. अगर कोई इमेज या CSS/JS फ़ाइल है तो उसे सीधे दिखाओ
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
 
 # Custom 404
 ErrorDocument 404 /404.html
