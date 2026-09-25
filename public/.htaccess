@@ -3,12 +3,20 @@ DirectoryIndex index.html
 RewriteEngine On
 RewriteBase /
 
-# 1. अगर URL के अंत में / है तो उसे हटाओ (redirect /ultimateheight/ to /ultimateheight)
+# 1. फ़ोल्डर ब्राउज़िंग ब्लॉक करें (403 सुरछा)
+Options -Indexes
+
+# 2. अगर कोई ज़बरदस्ती /paradise/ टाइप करे तो उसे /paradise पर Redirect करो
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI} (.+)/$
 RewriteRule ^ %1 [L,R=301]
 
-# 2. Clean URL को .html फ़ाइल से जोड़ो (/ultimateheight -> /ultimateheight.html)
+# 3. अगर कोई फ़ाइल या फ़ोल्डर डायरेक्ट मौजूद है तो उसे दिखाओ
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# 4. Clean URL (/paradise) को सर्वर पर paradise.html से जोड़ो
 RewriteCond %{DOCUMENT_ROOT}/$1.html -f
 RewriteRule ^(.*)$ $1.html [L]
 
