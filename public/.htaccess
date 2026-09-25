@@ -1,24 +1,49 @@
+# DirectoryIndex index.html
+
+# RewriteEngine On
+# RewriteBase /
+
+# # 1. फ़ोल्डर ब्राउज़िंग ब्लॉक करें (403 सुरछा)
+# Options -Indexes
+
+# # 2. अगर कोई ज़बरदस्ती /paradise/ टाइप करे तो उसे /paradise पर Redirect करो
+# RewriteCond %{REQUEST_FILENAME} !-d
+# RewriteCond %{REQUEST_URI} (.+)/$
+# RewriteRule ^ %1 [L,R=301]
+
+# # 3. अगर कोई फ़ाइल या फ़ोल्डर डायरेक्ट मौजूद है तो उसे दिखाओ
+# RewriteCond %{REQUEST_FILENAME} -f [OR]
+# RewriteCond %{REQUEST_FILENAME} -d
+# RewriteRule ^ - [L]
+
+# # 4. Clean URL (/paradise) को सर्वर पर paradise.html से जोड़ो
+# RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+# RewriteRule ^(.*)$ $1.html [L]
+
+# # Custom 404 page
+# ErrorDocument 404 /404.html
+
+
+
+
+
 DirectoryIndex index.html
 
 RewriteEngine On
 RewriteBase /
 
-# 1. फ़ोल्डर ब्राउज़िंग ब्लॉक करें (403 सुरछा)
-Options -Indexes
-
-# 2. अगर कोई ज़बरदस्ती /paradise/ टाइप करे तो उसे /paradise पर Redirect करो
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_URI} (.+)/$
-RewriteRule ^ %1 [L,R=301]
-
-# 3. अगर कोई फ़ाइल या फ़ोल्डर डायरेक्ट मौजूद है तो उसे दिखाओ
-RewriteCond %{REQUEST_FILENAME} -f [OR]
-RewriteCond %{REQUEST_FILENAME} -d
+# 1. अगर डायरेक्ट फ़ाइल (Images, CSS, JS) है तो सीधे लोड करो
+RewriteCond %{REQUEST_FILENAME} -f
 RewriteRule ^ - [L]
 
-# 4. Clean URL (/paradise) को सर्वर पर paradise.html से जोड़ो
+# 2. अगर URL के आख़िर में / लगा है तो उसे हटाकर Redirect करो (/signatureheritage/ -> /signatureheritage)
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} ^(.+)/$
+RewriteRule ^ %1 [L,R=301]
+
+# 3. Clean URL (/signatureheritage) को signatureheritage.html फ़ाइल से जोड़ो
 RewriteCond %{DOCUMENT_ROOT}/$1.html -f
 RewriteRule ^(.*)$ $1.html [L]
 
-# Custom 404 page
+# Custom 404
 ErrorDocument 404 /404.html
