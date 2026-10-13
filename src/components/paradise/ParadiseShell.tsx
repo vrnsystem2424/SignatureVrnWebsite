@@ -12,12 +12,23 @@ interface ParadiseShellProps {
 export default function ParadiseShell({ children }: ParadiseShellProps) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-  // Auto-open popup after 5 seconds (once per page visit)
+  // 5 second baad popup — lekin agar form pehle hi bhar diya hai to nahi
   useEffect(() => {
+    try {
+      if (sessionStorage.getItem("paradise_lead_done")) return;
+    } catch {}
+
     const timer = setTimeout(() => {
       setIsPopupOpen(true);
     }, 5000);
     return () => clearTimeout(timer);
+  }, []);
+
+  // Kisi bhi section ke button se popup kholne ke liye
+  useEffect(() => {
+    const open = () => setIsPopupOpen(true);
+    window.addEventListener("open-enquiry-popup", open);
+    return () => window.removeEventListener("open-enquiry-popup", open);
   }, []);
 
   const openPopup = () => setIsPopupOpen(true);

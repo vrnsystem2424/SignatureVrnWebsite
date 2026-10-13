@@ -18,10 +18,11 @@ export default function HeritageNavbar({ onEnquire }: HeritageNavbarProps) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const handleCtaClick = (e: React.MouseEvent) => {
+  const handleCtaClick = () => {
     if (onEnquire) {
-      e.preventDefault();
       onEnquire();
+    } else {
+      window.dispatchEvent(new Event("open-enquiry-popup"));
     }
   };
 
@@ -49,15 +50,15 @@ export default function HeritageNavbar({ onEnquire }: HeritageNavbarProps) {
           </div>
         </Link>
 
-        {/* RIGHT: Book Now (Opens Popup or Scrolls to Form) */}
-        <a
-          href="#contact"
+        {/* RIGHT: Book Now — opens enquiry popup */}
+        <button
+          type="button"
           onClick={handleCtaClick}
           className="inline-flex flex-shrink-0 items-center gap-1.5 rounded-full bg-amber-400 px-4 py-2 text-[10px] font-bold uppercase tracking-wider text-indigo-950 shadow-md shadow-amber-400/30 transition-all duration-300 hover:scale-[1.03] hover:bg-amber-500 active:scale-[0.97] sm:gap-2 sm:px-5 sm:py-2.5 sm:text-xs md:px-6 md:text-sm"
         >
           <PhoneCall className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
           Book Now
-        </a>
+        </button>
       </nav>
     </header>
   );

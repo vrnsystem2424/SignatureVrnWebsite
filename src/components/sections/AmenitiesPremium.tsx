@@ -2,7 +2,6 @@
 
 import Container from "../ui/Container";
 import { motion } from "framer-motion";
-import Image from "next/image";
 
 const amenities = [
   { name: "Grand Clubhouse", icon: "🏛️", description: "2,500 sq.ft. premium clubhouse" },
@@ -18,6 +17,10 @@ const amenities = [
 ];
 
 export default function AmenitiesPremium() {
+  const openEnquiry = () => {
+    window.dispatchEvent(new Event("open-enquiry-popup"));
+  };
+
   return (
     <section id="amenities" className="py-24 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
       <Container>
@@ -60,12 +63,13 @@ export default function AmenitiesPremium() {
           whileInView={{ opacity: 1 }}
           className="mt-12 text-center"
         >
-          <a
-            href="#enquire"
-            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 px-8 py-3 font-semibold hover:scale-105 transition-all"
+          <button
+            type="button"
+            onClick={openEnquiry}
+            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 px-8 py-3 font-semibold hover:scale-105 transition-all cursor-pointer"
           >
             Book a Tour Now <span>→</span>
-          </a>
+          </button>
         </motion.div>
       </Container>
     </section>

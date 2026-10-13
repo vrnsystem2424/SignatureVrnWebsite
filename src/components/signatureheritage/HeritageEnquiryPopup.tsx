@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { submitLeadToGoogleSheet } from "@/src/lib/utils";
 
 interface HeritageEnquiryPopupProps {
   isOpen: boolean;
@@ -11,6 +13,7 @@ export default function HeritageEnquiryPopup({
   isOpen,
   onClose,
 }: HeritageEnquiryPopupProps) {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -20,7 +23,6 @@ export default function HeritageEnquiryPopup({
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState("");
 
-  // Background scroll lock
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -32,15 +34,15 @@ export default function HeritageEnquiryPopup({
     };
   }, [isOpen]);
 
-  // Reset form jab popup band ho
   useEffect(() => {
     if (!isOpen) {
-      setTimeout(() => {
+      const t = setTimeout(() => {
         setFormData({ name: "", phone: "", message: "" });
         setIsSuccess(false);
         setError("");
         setIsSubmitting(false);
       }, 300);
+      return () => clearTimeout(t);
     }
   }, [isOpen]);
 
@@ -55,9 +57,9 @@ export default function HeritageEnquiryPopup({
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (isSubmitting) return;
     setError("");
 
-    // Basic validation
     if (!formData.name.trim() || !formData.phone.trim()) {
       setError("Name and Phone are required.");
       return;
@@ -70,22 +72,22 @@ export default function HeritageEnquiryPopup({
     setIsSubmitting(true);
 
     try {
-      // ────────────────────────────────────────────────
-      // TODO: Yahan Signature Heritage ka apna API endpoint lagao
-      // ────────────────────────────────────────────────
+      await submitLeadToGoogleSheet({
+        name: formData.name.trim(),
+        phone: formData.phone.trim(),
+        message: formData.message.trim(),
+        project: "Signature Heritage",
+      });
 
-      // Demo delay
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      try {
+        sessionStorage.setItem("heritage_lead_done", "1");
+      } catch {}
 
       setIsSuccess(true);
-
-      // 3 sec baad auto-close
-      setTimeout(() => {
-        onClose();
-      }, 3000);
+      document.body.style.overflow = "unset";
+      router.push("/signatureheritage/thankyou");
     } catch {
       setError("Something went wrong. Please try again.");
-    } finally {
       setIsSubmitting(false);
     }
   };
@@ -100,10 +102,8 @@ export default function HeritageEnquiryPopup({
 
       {/* Modal */}
       <div className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden">
-        {/* Gold top strip */}
         <div className="h-1.5 w-full bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-600" />
 
-        {/* Close button */}
         <button
           onClick={onClose}
           type="button"
@@ -116,7 +116,6 @@ export default function HeritageEnquiryPopup({
         </button>
 
         <div className="p-7 sm:p-8">
-          {/* Header */}
           <div className="mb-6">
             <p className="text-[11px] font-bold uppercase tracking-widest text-amber-600 mb-1">
               Signature Heritage
@@ -128,7 +127,6 @@ export default function HeritageEnquiryPopup({
           </div>
 
           {isSuccess ? (
-            /* ── Success State ── */
             <div className="text-center py-10">
               <div className="w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg className="w-8 h-8 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -137,14 +135,11 @@ export default function HeritageEnquiryPopup({
               </div>
               <h4 className="text-xl font-bold text-slate-900 mb-2">Thank You!</h4>
               <p className="text-sm text-slate-600 leading-relaxed">
-                Your enquiry for <strong>Signature Heritage</strong> has been
-                received. Our team will contact you soon.
+                Redirecting to thank you page...
               </p>
             </div>
           ) : (
-            /* ── Form ── */
             <form onSubmit={handleSubmit} className="space-y-4">
-              {/* Name */}
               <div>
                 <label htmlFor="heritage-name" className="block text-sm font-medium text-slate-700 mb-1">
                   Full Name <span className="text-red-500">*</span>
@@ -161,13 +156,13 @@ export default function HeritageEnquiryPopup({
                 />
               </div>
 
-              {/* Phone */}
               <div>
                 <label htmlFor="heritage-phone" className="block text-sm font-medium text-slate-700 mb-1">
                   Phone Number <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="tel"
+                  inputMode="numeric"
                   id="heritage-phone"
                   name="phone"
                   required
@@ -179,7 +174,6 @@ export default function HeritageEnquiryPopup({
                 />
               </div>
 
-              {/* Message (optional) */}
               <div>
                 <label htmlFor="heritage-message" className="block text-sm font-medium text-slate-700 mb-1">
                   Message <span className="text-slate-400 font-normal">(optional)</span>
@@ -195,14 +189,12 @@ export default function HeritageEnquiryPopup({
                 />
               </div>
 
-              {/* Error */}
               {error && (
                 <p className="text-sm text-red-600 bg-red-50 border border-red-100 rounded-lg px-3 py-2">
                   {error}
                 </p>
               )}
 
-              {/* Submit */}
               <button
                 type="submit"
                 disabled={isSubmitting}

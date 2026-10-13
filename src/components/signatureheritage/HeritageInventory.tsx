@@ -1,6 +1,12 @@
+"use client";
+
 import { heritageData } from "../../data/signatureheritage";
 
 export default function HeritageInventory() {
+  const openEnquiry = () => {
+    window.dispatchEvent(new Event("open-enquiry-popup"));
+  };
+
   return (
     <section id="inventory" className="py-24 bg-[#FAF9F6]">
       <div className="max-w-7xl mx-auto px-4">
@@ -18,9 +24,13 @@ export default function HeritageInventory() {
                   </li>
                 ))}
               </ul>
-              <a href="#lead-form" className="block text-center border border-indigo-950 text-indigo-950 py-3 uppercase text-sm font-bold hover:bg-indigo-950 hover:text-white transition">
+              <button
+                type="button"
+                onClick={openEnquiry}
+                className="block w-full text-center rounded-xl bg-amber-500 text-slate-950 py-3.5 uppercase text-sm font-bold shadow-md shadow-amber-500/20 hover:bg-amber-400 transition-all duration-200"
+              >
                 Request Details
-              </a>
+              </button>
             </div>
           ))}
         </div>

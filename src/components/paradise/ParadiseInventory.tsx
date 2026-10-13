@@ -6,8 +6,9 @@ import { paradiseData } from "../../data/paradise";
 import ScrollReveal from "../paradise/ScrollReveal";
 
 export default function ParadiseInventory() {
-  const scrollToForm = () =>
-    document.getElementById("home")?.scrollIntoView({ behavior: "smooth" });
+  const openEnquiry = () => {
+    window.dispatchEvent(new Event("open-enquiry-popup"));
+  };
 
   const plots = [
     {
@@ -39,7 +40,7 @@ export default function ParadiseInventory() {
   return (
     <section id="inventory" className="py-16 sm:py-24 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Header */}
         <ScrollReveal animation="fade-up">
           <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
@@ -86,7 +87,7 @@ export default function ParadiseInventory() {
           {plots.map((plot, i) => (
             <ScrollReveal key={i} animation="fade-up" delay={i * 150}>
               <div className="group relative h-full bg-[#FAFAFA] rounded-2xl border border-slate-200 p-6 sm:p-8 hover:shadow-xl hover:border-emerald-200 hover:-translate-y-1 transition-all duration-300 flex flex-col">
-                
+
                 {/* Top row */}
                 <div className="flex items-start justify-between gap-3 mb-5">
                   <div className="flex items-center gap-3">
@@ -126,9 +127,10 @@ export default function ParadiseInventory() {
                   ))}
                 </ul>
 
-                {/* CTA — no price, only enquire */}
+                {/* CTA — opens enquiry popup */}
                 <button
-                  onClick={scrollToForm}
+                  type="button"
+                  onClick={openEnquiry}
                   className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs sm:text-sm uppercase tracking-wider py-3.5 shadow-md shadow-emerald-700/15 transition-all active:scale-[0.98]"
                 >
                   <Sparkles className="w-4 h-4" />

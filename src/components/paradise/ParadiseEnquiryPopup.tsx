@@ -1,8 +1,10 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { X, CheckCircle2, ArrowRight } from "lucide-react";
 import { paradiseData } from "../../data/paradise";
+import { submitLeadToGoogleSheet } from "@/src/lib/utils";
 
 export interface ParadiseEnquiryPopupProps {
   isOpen: boolean;
@@ -13,6 +15,7 @@ export default function ParadiseEnquiryPopup({
   isOpen,
   onClose,
 }: ParadiseEnquiryPopupProps) {
+  const router = useRouter();
   const [shouldRender, setShouldRender] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -48,7 +51,9 @@ export default function ParadiseEnquiryPopup({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
     setError("");
+
     if (!formData.name.trim() || !formData.phone.trim()) {
       setError("Name and phone are required.");
       return;
@@ -60,12 +65,21 @@ export default function ParadiseEnquiryPopup({
 
     setIsSubmitting(true);
     try {
-      await new Promise((r) => setTimeout(r, 1200));
+      await submitLeadToGoogleSheet({
+        name: formData.name.trim(),
+        phone: formData.phone.trim(),
+        project: "Signature Paradise",
+      });
+
+      try {
+        sessionStorage.setItem("paradise_lead_done", "1");
+      } catch {}
+
       setSubmitted(true);
-      setTimeout(() => onClose(), 2500);
+      document.body.style.overflow = "unset";
+      router.push("/paradise/thankyou");
     } catch {
       setError("Something went wrong. Please try again.");
-    } finally {
       setIsSubmitting(false);
     }
   };
@@ -94,7 +108,6 @@ export default function ParadiseEnquiryPopup({
             : undefined,
         }}
       >
-        {/* Top Accent Strip */}
         <div className="h-1.5 w-full bg-gradient-to-r from-emerald-500 via-emerald-600 to-teal-600" />
 
         <button
@@ -112,15 +125,9 @@ export default function ParadiseEnquiryPopup({
               <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-emerald-50 border border-emerald-100">
                 <CheckCircle2 className="w-7 h-7 text-emerald-600" />
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-2">
-                Thank You!
-              </h3>
+              <h3 className="text-xl font-bold text-slate-900 mb-2">Thank You!</h3>
               <p className="text-sm text-slate-600 leading-relaxed">
-                Your enquiry for{" "}
-                <strong>
-                  {paradiseData?.projectName || "Signature Paradise"}
-                </strong>{" "}
-                has been received. Our team will contact you shortly.
+                Redirecting to thank you page...
               </p>
             </div>
           ) : (
@@ -160,6 +167,7 @@ export default function ParadiseEnquiryPopup({
                   <input
                     name="phone"
                     type="tel"
+                    inputMode="numeric"
                     required
                     maxLength={10}
                     value={formData.phone}

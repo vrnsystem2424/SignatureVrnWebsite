@@ -6,11 +6,15 @@ import { heritageData } from "../../data/signatureheritage";
 import ScrollReveal from "../signatureheritage/ScrollReveal";
 
 export default function HeritageDidYouKnow() {
+  const openEnquiry = () => {
+    window.dispatchEvent(new Event("open-enquiry-popup"));
+  };
+
   return (
     <section className="py-16 sm:py-24 bg-indigo-950 text-white overflow-hidden relative">
       <div className="pointer-events-none absolute top-0 left-1/4 w-72 h-72 bg-amber-400/10 rounded-full blur-3xl" />
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         <ScrollReveal animation="fade-up">
           <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
             <div className="inline-flex items-center gap-2 rounded-full bg-amber-400/10 border border-amber-400/20 px-3 py-1.5 mb-3">
@@ -41,13 +45,14 @@ export default function HeritageDidYouKnow() {
 
         <ScrollReveal animation="fade-up" delay={400}>
           <div className="text-center">
-            <a
-              href="#contact"
+            <button
+              type="button"
+              onClick={openEnquiry}
               className="inline-flex items-center gap-2 rounded-full bg-amber-400 hover:bg-amber-500 text-indigo-950 text-xs sm:text-sm font-bold uppercase tracking-wider px-6 py-3.5 shadow-lg shadow-amber-400/20 transition-all active:scale-95"
             >
               Click Here To Know More
               <ArrowRight className="w-4 h-4" />
-            </a>
+            </button>
           </div>
         </ScrollReveal>
 

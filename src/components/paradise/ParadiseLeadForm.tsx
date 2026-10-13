@@ -1,10 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { paradiseData } from "../../data/paradise";
+import { submitLeadToGoogleSheet } from "@/src/lib/utils";
 
 export default function ParadiseLeadForm() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -13,36 +16,62 @@ export default function ParadiseLeadForm() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setError("");
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name.trim() || !formData.phone.trim()) return;
+    if (isSubmitting) return;
+    setError("");
+
+    if (!formData.name.trim() || !formData.phone.trim()) {
+      setError("Name and phone are required.");
+      return;
+    }
+    if (!/^[0-9]{10}$/.test(formData.phone.trim())) {
+      setError("Enter a valid 10-digit mobile number.");
+      return;
+    }
 
     setIsSubmitting(true);
 
-    // ✅ Clean number for WhatsApp without touching .contact
+    // WhatsApp click ke turant baad khulega, warna mobile par block hota hai
     const waNumber =
       paradiseData.whatsappNumber ||
       paradiseData.phone?.replace(/[^0-9]/g, "") ||
       "919999999999";
 
     const msg = `New Enquiry - Signature Paradise%0A%0AName: ${encodeURIComponent(
-      formData.name
+      formData.name.trim()
     )}%0APhone: ${encodeURIComponent(
-      formData.phone
+      formData.phone.trim()
     )}%0AEmail: ${encodeURIComponent(
-      formData.email
-    )}%0ACity: ${encodeURIComponent(formData.city)}`;
+      formData.email.trim()
+    )}%0ACity: ${encodeURIComponent(formData.city.trim())}`;
+
+    window.open(`https://wa.me/${waNumber}?text=${msg}`, "_blank");
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await submitLeadToGoogleSheet({
+        name: formData.name.trim(),
+        phone: formData.phone.trim(),
+        email: formData.email.trim(),
+        city: formData.city.trim(),
+        project: "Signature Paradise",
+      });
+
+      try {
+        sessionStorage.setItem("paradise_lead_done", "1");
+      } catch {}
+
       setSubmitted(true);
-      window.open(`https://wa.me/${waNumber}?text=${msg}`, "_blank");
-    } finally {
+      router.push("/paradise/thankyou");
+    } catch {
+      setError("Something went wrong. Please try again.");
       setIsSubmitting(false);
     }
   };
@@ -51,7 +80,7 @@ export default function ParadiseLeadForm() {
     <section id="contact-form" className="py-16 sm:py-24 bg-white overflow-hidden">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-[#FAFAFA] rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-xl relative overflow-hidden">
-          
+
           <div className="text-center max-w-xl mx-auto mb-8">
             <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 bg-emerald-50 border border-emerald-100 px-3 py-1.5 rounded-full inline-block mb-3">
               Book Your Site Visit
@@ -71,18 +100,8 @@ export default function ParadiseLeadForm() {
               </div>
               <h3 className="text-xl font-bold text-slate-900 mb-2">Thank You!</h3>
               <p className="text-sm text-slate-600">
-                Your enquiry has been received. Redirecting to WhatsApp...
+                Your enquiry has been received. Redirecting...
               </p>
-              <button
-                type="button"
-                onClick={() => {
-                  setSubmitted(false);
-                  setFormData({ name: "", phone: "", email: "", city: "" });
-                }}
-                className="mt-5 text-xs font-bold uppercase tracking-wider text-emerald-700 underline underline-offset-4"
-              >
-                Submit Another Request
-              </button>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -108,6 +127,7 @@ export default function ParadiseLeadForm() {
                 <input
                   name="phone"
                   type="tel"
+                  inputMode="numeric"
                   required
                   maxLength={10}
                   value={formData.phone}
@@ -141,9 +161,15 @@ export default function ParadiseLeadForm() {
                   value={formData.city}
                   onChange={handleChange}
                   placeholder="e.g. Bhopal"
-                  className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10"
+                  className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10"
                 />
               </div>
+
+              {error && (
+                <p className="sm:col-span-2 text-xs text-red-600 bg-red-50 border border-red-100 rounded-lg px-3 py-2">
+                  {error}
+                </p>
+              )}
 
               <div className="sm:col-span-2 mt-2">
                 <button

@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import HeritageEnquiryPopup from "./HeritageEnquiryPopup";
 
 interface HeritageStickyBarProps {
   phone?: string;
   whatsapp?: string;
-  projectName?: string; // ← Yeh line add karein
+  projectName?: string;
 }
 
 export default function HeritageStickyBar({
@@ -15,6 +15,23 @@ export default function HeritageStickyBar({
   projectName = "Signature Heritage",
 }: HeritageStickyBarProps) {
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
+
+  // 5 second baad auto popup — agar form pehle hi bhar diya hai to nahi
+  useEffect(() => {
+    try {
+      if (sessionStorage.getItem("heritage_lead_done")) return;
+    } catch {}
+
+    const timer = setTimeout(() => setIsEnquiryOpen(true), 5000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Page ke kisi bhi button se popup kholne ke liye
+  useEffect(() => {
+    const open = () => setIsEnquiryOpen(true);
+    window.addEventListener("open-enquiry-popup", open);
+    return () => window.removeEventListener("open-enquiry-popup", open);
+  }, []);
 
   const handleCall = () => {
     window.location.href = `tel:${phone}`;
@@ -50,7 +67,6 @@ export default function HeritageStickyBar({
             </span>
           </button>
 
-          {/* Divider */}
           <div className="h-9 w-[1px] bg-slate-200/80" />
 
           {/* ENQUIRE */}
@@ -77,7 +93,6 @@ export default function HeritageStickyBar({
             </span>
           </button>
 
-          {/* Divider */}
           <div className="h-9 w-[1px] bg-slate-200/80" />
 
           {/* CHAT */}

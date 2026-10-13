@@ -2,8 +2,8 @@ export const siteConfig = {
   projectName: "Signature Heritage",
   tagline: "Premium Living Designed For Modern Families",
   location: "Kolar Road, Bhopal",
-  phone: "+919999999999",
-  whatsappNumber: "919999999999",
+  phone: "+91 92034 03607",      
+  whatsappNumber: "919203403607",
   email: "info@signatureheritage.in",
   brochureUrl: "/images/signatureheritage/signature%20heritage%20brochure%20SALES.pdf",
   mapEmbedUrl:

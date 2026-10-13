@@ -6,14 +6,14 @@ import { paradiseData } from "../../data/paradise";
 import ScrollReveal from "../paradise/ScrollReveal";
 
 export default function ParadiseFeatures() {
-  const scrollToForm = () => {
-    document.getElementById("home")?.scrollIntoView({ behavior: "smooth" });
+  const openEnquiry = () => {
+    window.dispatchEvent(new Event("open-enquiry-popup"));
   };
 
   return (
     <section id="features" className="py-16 sm:py-24 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Header */}
         <ScrollReveal animation="fade-up">
           <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
@@ -29,7 +29,7 @@ export default function ParadiseFeatures() {
 
         {/* Two Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
-          
+
           {/* Township Features */}
           <ScrollReveal animation="fade-right" delay={100}>
             <div className="h-full bg-[#FAFAFA] rounded-2xl border border-slate-100 p-6 sm:p-8 hover:shadow-xl hover:border-emerald-100 transition-all duration-300">
@@ -52,7 +52,8 @@ export default function ParadiseFeatures() {
               </ul>
 
               <button
-                onClick={scrollToForm}
+                type="button"
+                onClick={openEnquiry}
                 className="inline-flex items-center gap-2 rounded-full bg-emerald-700 hover:bg-emerald-800 text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-5 py-3 shadow-md shadow-emerald-700/20 transition-all active:scale-95"
               >
                 Get Project Details
@@ -83,7 +84,8 @@ export default function ParadiseFeatures() {
               </ul>
 
               <button
-                onClick={scrollToForm}
+                type="button"
+                onClick={openEnquiry}
                 className="inline-flex items-center gap-2 rounded-full bg-amber-400 hover:bg-amber-300 text-slate-900 text-xs sm:text-sm font-bold uppercase tracking-wider px-5 py-3 shadow-md shadow-amber-400/20 transition-all active:scale-95"
               >
                 Get Location Benefits

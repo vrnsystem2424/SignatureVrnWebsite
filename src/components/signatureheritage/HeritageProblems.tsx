@@ -6,10 +6,14 @@ import { heritageData } from "../../data/signatureheritage";
 import ScrollReveal from "../signatureheritage/ScrollReveal";
 
 export default function HeritageProblems() {
+  const openEnquiry = () => {
+    window.dispatchEvent(new Event("open-enquiry-popup"));
+  };
+
   return (
     <section className="py-16 sm:py-24 bg-[#FAF9F6] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         <ScrollReveal animation="fade-up">
           <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
             <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-indigo-800 bg-indigo-100/50 border border-indigo-200 px-3 py-1.5 rounded-full inline-block mb-3">
@@ -23,7 +27,7 @@ export default function HeritageProblems() {
         </ScrollReveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
-          
+
           {/* Problems */}
           <ScrollReveal animation="fade-right">
             <div className="h-full rounded-2xl border border-red-100 bg-red-50/50 p-6 sm:p-8">
@@ -46,7 +50,7 @@ export default function HeritageProblems() {
             </div>
           </ScrollReveal>
 
-          {/* Solutions (Signature Heritage) */}
+          {/* Solutions */}
           <ScrollReveal animation="fade-left" delay={150}>
             <div className="h-full rounded-2xl border border-indigo-200 bg-indigo-50/50 p-6 sm:p-8">
               <h3 className="text-lg sm:text-xl font-serif font-bold text-indigo-950 mb-2">
@@ -63,14 +67,15 @@ export default function HeritageProblems() {
                   </li>
                 ))}
               </ul>
-              
-              <a
-                href="#contact"
+
+              <button
+                type="button"
+                onClick={openEnquiry}
                 className="inline-flex items-center gap-2 rounded-full bg-indigo-950 hover:bg-indigo-900 text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-5 py-3 shadow-md transition-all active:scale-95"
               >
                 Click Here To Know More
                 <ArrowRight className="w-4 h-4" />
-              </a>
+              </button>
             </div>
           </ScrollReveal>
 

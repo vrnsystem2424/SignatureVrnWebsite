@@ -6,8 +6,9 @@ import { paradiseData } from "../../data/paradise";
 import ScrollReveal from "../paradise/ScrollReveal";
 
 export default function ParadiseComplete() {
-  const scrollToForm = () =>
-    document.getElementById("home")?.scrollIntoView({ behavior: "smooth" });
+  const openEnquiry = () => {
+    window.dispatchEvent(new Event("open-enquiry-popup"));
+  };
 
   return (
     <section className="py-16 sm:py-24 bg-white overflow-hidden">
@@ -40,7 +41,8 @@ export default function ParadiseComplete() {
         <ScrollReveal animation="fade-up" delay={200}>
           <div className="text-center">
             <button
-              onClick={scrollToForm}
+              type="button"
+              onClick={openEnquiry}
               className="inline-flex items-center gap-2 rounded-full bg-emerald-700 hover:bg-emerald-800 text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-6 py-3.5 shadow-lg shadow-emerald-700/20 transition-all active:scale-95"
             >
               Know More

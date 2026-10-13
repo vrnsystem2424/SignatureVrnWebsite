@@ -6,10 +6,14 @@ import { heritageData } from "../../data/signatureheritage";
 import ScrollReveal from "../signatureheritage/ScrollReveal";
 
 export default function HeritageReasons() {
+  const openEnquiry = () => {
+    window.dispatchEvent(new Event("open-enquiry-popup"));
+  };
+
   return (
     <section className="py-16 sm:py-24 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         <ScrollReveal animation="fade-up">
           <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
             <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-amber-600 bg-amber-50 border border-amber-200 px-3 py-1.5 rounded-full inline-block mb-3">
@@ -22,7 +26,6 @@ export default function HeritageReasons() {
           </div>
         </ScrollReveal>
 
-        {/* List of 10-15 Reasons mapping */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-10">
           {heritageData.reasons?.map((reason, i) => (
             <ScrollReveal key={i} animation="fade-up" delay={(i % 6) * 60}>
@@ -41,13 +44,14 @@ export default function HeritageReasons() {
 
         <ScrollReveal animation="fade-up" delay={200}>
           <div className="text-center">
-            <a
-              href="#contact"
+            <button
+              type="button"
+              onClick={openEnquiry}
               className="inline-flex items-center gap-2 rounded-full bg-indigo-950 hover:bg-indigo-900 text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-6 py-3.5 shadow-lg transition-all active:scale-95"
             >
               Get Full Project Details
               <ArrowRight className="w-4 h-4" />
-            </a>
+            </button>
           </div>
         </ScrollReveal>
 

@@ -60,9 +60,14 @@ export default function HeritageFooter() {
               Contact
             </p>
             <ul className="space-y-3 text-sm text-neutral-400">
-              <li className="flex items-center gap-2">
-                <Phone size={16} className="text-amber-400 shrink-0" />
-                {siteConfig.phone}
+              <li>
+                <a
+                  href={`tel:${siteConfig.phone?.replace(/\s/g, "")}`}
+                  className="flex items-center gap-2 transition-colors hover:text-amber-400"
+                >
+                  <Phone size={16} className="text-amber-400 shrink-0" />
+                  {siteConfig.phone}
+                </a>
               </li>
               <li className="flex items-center gap-2">
                 <Mail size={16} className="text-amber-400 shrink-0" />

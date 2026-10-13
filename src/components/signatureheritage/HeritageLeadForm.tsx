@@ -1,31 +1,67 @@
-
-
 "use client";
 
 import { useState, FormEvent } from "react";
+import { useRouter } from "next/navigation";
 import { Send, MessageCircle } from "lucide-react";
 import { leadFormContent, siteConfig } from "../../data/signatureheritage";
+import { submitLeadToGoogleSheet } from "@/src/lib/utils";
 
 export default function HeritageLeadForm() {
+  const router = useRouter();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [interest, setInterest] = useState(leadFormContent.interestOptions[0]);
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
   const buildWhatsAppUrl = () => {
-    const message = `Hello Signature Heritage Team,%0A%0AMy name is *${name}*.%0AContact number: *${phone}*.%0AI am interested in: *${interest}*.%0A%0APlease share more details.`;
+    const message = `Hello Signature Heritage Team,%0A%0AMy name is *${encodeURIComponent(
+      name.trim()
+    )}*.%0AContact number: *${encodeURIComponent(
+      phone.trim()
+    )}*.%0AI am interested in: *${encodeURIComponent(
+      interest
+    )}*.%0A%0APlease share more details.`;
     return `https://wa.me/${siteConfig.whatsappNumber}?text=${message}`;
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!name || !phone) return;
+    if (isSubmitting) return;
+    setError("");
 
-    // TODO: Wire this up to your CRM / lead API endpoint (e.g. fetch('/api/lead', ...))
-    setSubmitted(true);
+    if (!name.trim() || !phone.trim()) {
+      setError("Name and phone are required.");
+      return;
+    }
+    if (!/^[0-9]{10}$/.test(phone.trim())) {
+      setError("Enter a valid 10-digit mobile number.");
+      return;
+    }
 
-    // Open WhatsApp with a pre-filled enquiry message
+    setIsSubmitting(true);
+
+    // WhatsApp click ke turant baad khulega, warna mobile par block hota hai
     window.open(buildWhatsAppUrl(), "_blank");
+
+    try {
+      await submitLeadToGoogleSheet({
+        name: name.trim(),
+        phone: phone.trim(),
+        message: `Interested in: ${interest}`,
+        project: "Signature Heritage",
+      });
+
+      try {
+        sessionStorage.setItem("heritage_lead_done", "1");
+      } catch {}
+      router.push("/signatureheritage/thankyou");
+    } catch (err) {
+      console.error("Submission error:", err);
+      setError("Something went wrong. Please try again.");
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -66,8 +102,7 @@ export default function HeritageLeadForm() {
                   </div>
                   <h3 className="font-serif text-2xl text-indigo-950">Thank You!</h3>
                   <p className="mt-2 text-sm text-neutral-600">
-                    Your enquiry has been received. Our team will reach out to you shortly.
-                    We've also opened WhatsApp so you can message us directly.
+                    Your enquiry has been received. Redirecting to thank you page...
                   </p>
                 </div>
               ) : (
@@ -84,7 +119,10 @@ export default function HeritageLeadForm() {
                       type="text"
                       required
                       value={name}
-                      onChange={(e) => setName(e.target.value)}
+                      onChange={(e) => {
+                        setName(e.target.value);
+                        setError("");
+                      }}
                       placeholder="Enter your full name"
                       className="w-full rounded-xl border border-neutral-300 px-4 py-3 text-sm text-indigo-950 outline-none transition-colors focus:border-amber-400 focus:ring-2 focus:ring-amber-400/30"
                     />
@@ -100,10 +138,15 @@ export default function HeritageLeadForm() {
                     <input
                       id="phone"
                       type="tel"
+                      inputMode="numeric"
                       required
+                      maxLength={10}
                       value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                      placeholder="e.g. 98765 43210"
+                      onChange={(e) => {
+                        setPhone(e.target.value);
+                        setError("");
+                      }}
+                      placeholder="10-digit mobile number"
                       className="w-full rounded-xl border border-neutral-300 px-4 py-3 text-sm text-indigo-950 outline-none transition-colors focus:border-amber-400 focus:ring-2 focus:ring-amber-400/30"
                     />
                   </div>
@@ -113,7 +156,7 @@ export default function HeritageLeadForm() {
                       htmlFor="interest"
                       className="mb-1.5 block text-sm font-medium text-indigo-950"
                     >
-                      I'm Interested In
+                      I&apos;m Interested In
                     </label>
                     <select
                       id="interest"
@@ -129,12 +172,19 @@ export default function HeritageLeadForm() {
                     </select>
                   </div>
 
+                  {error && (
+                    <p className="text-xs text-red-600 bg-red-50 border border-red-100 rounded-lg px-3 py-2">
+                      {error}
+                    </p>
+                  )}
+
                   <button
                     type="submit"
-                    className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-amber-400 px-6 py-3.5 text-sm font-semibold uppercase tracking-wide text-indigo-950 transition-transform hover:scale-[1.02]"
+                    disabled={isSubmitting}
+                    className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-amber-400 px-6 py-3.5 text-sm font-semibold uppercase tracking-wide text-indigo-950 transition-transform hover:scale-[1.02] disabled:opacity-70"
                   >
                     <Send size={16} />
-                    Submit Enquiry
+                    {isSubmitting ? "Submitting..." : "Submit Enquiry"}
                   </button>
 
                   <p className="text-center text-xs text-neutral-400">

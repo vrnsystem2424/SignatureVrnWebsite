@@ -1,54 +1,16 @@
-# DirectoryIndex index.html
-
-# RewriteEngine On
-# RewriteBase /
-
-# # 1. फ़ोल्डर ब्राउज़िंग ब्लॉक करें (403 सुरछा)
-# Options -Indexes
-
-# # 2. अगर कोई ज़बरदस्ती /paradise/ टाइप करे तो उसे /paradise पर Redirect करो
-# RewriteCond %{REQUEST_FILENAME} !-d
-# RewriteCond %{REQUEST_URI} (.+)/$
-# RewriteRule ^ %1 [L,R=301]
-
-# # 3. अगर कोई फ़ाइल या फ़ोल्डर डायरेक्ट मौजूद है तो उसे दिखाओ
-# RewriteCond %{REQUEST_FILENAME} -f [OR]
-# RewriteCond %{REQUEST_FILENAME} -d
-# RewriteRule ^ - [L]
-
-# # 4. Clean URL (/paradise) को सर्वर पर paradise.html से जोड़ो
-# RewriteCond %{DOCUMENT_ROOT}/$1.html -f
-# RewriteRule ^(.*)$ $1.html [L]
-
-# # Custom 404 page
-# ErrorDocument 404 /404.html
-
-
-
-
-
-
+# Set index.html as default
 DirectoryIndex index.html
 
+# Enable rewriting
 RewriteEngine On
-RewriteBase /
 
-# 1. सिक्योरिटी के लिए फ़ोल्डर लिस्टिंग बंद करें
-Options -Indexes
+# Handle Next.js routing - try file, then folder/index.html, then 404
+RewriteRule ^([^.]+[^/])$ $1/ [L,R=301]
 
-# 2. अगर कोई URL के आख़िर में / टाइप करे तो उसे बिना / पर redirect करें (/paradise/ -> /paradise)
+# Serve index.html for clean URLs
+RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_URI} ^(.+)/$
-RewriteRule ^ %1 [L,R=301]
+RewriteRule ^(.+)$ /$1.html [L]
 
-# 3. Clean URL (/paradise) को paradise.html फ़ाइल से चलाएं
-RewriteCond %{DOCUMENT_ROOT}/$1.html -f
-RewriteRule ^(.*)$ $1.html [L]
-
-# 4. अगर कोई इमेज या CSS/JS फ़ाइल है तो उसे सीधे दिखाओ
-RewriteCond %{REQUEST_FILENAME} -f [OR]
-RewriteCond %{REQUEST_FILENAME} -d
-RewriteRule ^ - [L]
-
-# Custom 404
+# Custom 404 page
 ErrorDocument 404 /404.html
