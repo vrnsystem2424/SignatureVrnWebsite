@@ -1,16 +1,23 @@
 # Set index.html as default
 DirectoryIndex index.html
 
-# Enable rewriting
-RewriteEngine On
+# Disable Directory Browsing (Prevents 403 Forbidden Error)
+Options -Indexes
 
-# Handle Next.js routing - try file, then folder/index.html, then 404
-RewriteRule ^([^.]+[^/])$ $1/ [L,R=301]
+<IfModule mod_rewrite.c>
+  RewriteEngine On
 
-# Serve index.html for clean URLs
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.+)$ /$1.html [L]
+  # Force REMOVE Trailing Slash (e.g. /signatureheritage/ -> /signatureheritage)
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_URI} (.+)/$
+  RewriteRule ^ %1 [L,R=301]
 
-# Custom 404 page
+  # Serve HTML files without showing .html extension in URL
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME}.html -f
+  RewriteRule ^(.*)$ $1.html [L]
+</IfModule>
+
+# Custom 404 Fallback
 ErrorDocument 404 /404.html
