@@ -1,23 +1,22 @@
-# Set index.html as default
 DirectoryIndex index.html
-
-# Disable Directory Browsing (Prevents 403 Forbidden Error)
 Options -Indexes
+DirectorySlash Off
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
-  # Force REMOVE Trailing Slash (e.g. /signatureheritage/ -> /signatureheritage)
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteCond %{REQUEST_URI} (.+)/$
-  RewriteRule ^ %1 [L,R=301]
+  # 1. Agar request actual file ke liye hai (e.g. JS, CSS, images), toh waise hi serve karo
+  RewriteCond %{REQUEST_FILENAME} -f
+  RewriteRule ^ - [L]
 
-  # Serve HTML files without showing .html extension in URL
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteCond %{REQUEST_FILENAME}.html -f
-  RewriteRule ^(.*)$ $1.html [L]
+  # 2. Signatureheritage, Paradise, Ultimateheight jaha folder aur html dono hain:
+  # Hostinger ko folder par 404/403 dene se roko aur direct .html file serve karo
+  RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+  RewriteRule ^(.*)/?$ /$1.html [L]
+
+  # 3. Sub-pages ke liye (e.g. signatureheritage/thankyou -> signatureheritage/thankyou.html)
+  RewriteCond %{DOCUMENT_ROOT}/$1/index.html -f
+  RewriteRule ^(.*)$ /$1/index.html [L]
 </IfModule>
 
-# Custom 404 Fallback
 ErrorDocument 404 /404.html
