@@ -57,7 +57,6 @@
 
 
 
-
 import type { Metadata } from "next";
 import Script from "next/script";
 import UltimateShell from "../../components/ultimateheight/UltimateShell";
@@ -89,7 +88,7 @@ export const metadata: Metadata = {
 export default function UltimateHeightPage() {
   return (
     <>
-      {/* Google Tag Manager — Head */}
+      {/* ===== Google Tag Manager ===== */}
       <Script id="gtm-ultimate" strategy="afterInteractive">
         {`
           (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -100,7 +99,21 @@ export default function UltimateHeightPage() {
         `}
       </Script>
 
-      {/* Google Tag Manager — noscript */}
+      {/* ===== Google Ads (gtag.js) ===== */}
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=AW-18508545225"
+        strategy="afterInteractive"
+      />
+      <Script id="gtag-ultimate" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'AW-18508545225');
+        `}
+      </Script>
+
+      {/* GTM noscript */}
       <noscript>
         <iframe
           src="https://www.googletagmanager.com/ns.html?id=GTM-W73ZN7LM"
