@@ -11,10 +11,10 @@ export const allProjects = [
     location: "Kolar Road, Bhopal",
     status: "Ready to Move",
   },
-  {
-    name: "Signature Heritage",
-    slug: "/signatureheritage",
-    location: "Hoshangabad Road, Bhopal",
-    status: "New Launch",
-  },
+  // {
+  //   name: "Signature Heritage",
+  //   slug: "/signatureheritage",
+  //   location: "Hoshangabad Road, Bhopal",
+  //   status: "New Launch",
+  // },
 ];

@@ -10,19 +10,19 @@ export const metadata: Metadata = {
 
 /* ───────── Project Data ───────── */
 const projects = [
-  {
-    name: "Signature Heritage",
-    type: "Luxury Duplex Township",
-    desc: "Grand club house, swimming pool, lush gardens & 24×7 gated security in a royal heritage theme.",
-    img: "/images/signatureheritage/2 ENTRY GATE.jpg",
-    href: "/signatureheritage",
-    badge: "Featured",
-  },
+  // {
+  //   name: "Signature Heritage",
+  //   type: "Luxury Duplex Township",
+  //   desc: "Grand club house, swimming pool, lush gardens & 24×7 gated security in a royal heritage theme.",
+  //   img: "/images/signatureheritage/2 ENTRY GATE.jpg",
+  //   href: "/signatureheritage",
+  //   badge: "Featured",
+  // },
   {
     name: "Paradise",
     type: "Modern Family Residences",
     desc: "Thoughtfully planned homes with world-class amenities, green spaces & seamless connectivity.",
-    img: "/images/exterior.jpg",
+    img: "/images/paradise/Signature Paradise front view.jpg",
     href: "/paradise",
     badge: "Selling Fast",
   },
@@ -30,7 +30,7 @@ const projects = [
     name: "Ultimate Height",
     type: "Premium High-Rise Towers",
     desc: "Sky-high living with panoramic city views, rooftop infinity pool & smart home automation.",
-    img: "/images/living-room.jpg",
+    img: "/images/ultimateheight/exterior.jpg",
     href: "/ultimateheight",
     badge: "Upcoming",
   },
