@@ -46,10 +46,12 @@ export default function ParadiseFooter() {
                 <PhoneCall className="w-5 h-5 text-emerald-500 shrink-0" />
                 <a href={`tel:${paradiseData.phone}`} className="text-sm hover:text-emerald-400 transition-colors">{paradiseData.phone}</a>
               </li>
-              <li className="flex items-center gap-3">
-                <Mail className="w-5 h-5 text-emerald-500 shrink-0" />
-                <a href="mailto:info@signatureparadise.in" className="text-sm hover:text-emerald-400 transition-colors">info@signatureparadise.in</a>
-              </li>
+             <li className="flex items-center gap-3">
+  <Mail className="w-5 h-5 text-emerald-500 shrink-0" />
+  <a href="mailto:system@gmail.com" className="text-sm hover:text-emerald-400 transition-colors">
+    system@gmail.com
+  </a>
+</li>
             </ul>
           </div>
         </div>

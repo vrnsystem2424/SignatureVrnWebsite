@@ -66,7 +66,6 @@ export default function ParadiseHero() {
           alt="Signature Paradise Main Gate"
           fill
           priority
-          quality={95}
           className="object-cover object-top sm:object-center"
           sizes="100vw"
         />

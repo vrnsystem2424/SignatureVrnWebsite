@@ -24,7 +24,7 @@ export const ultimateHeightData = {
       { value: "3", label: "Units Left" },
       { value: "20+", label: "Amenities" },
     ],
-    image: "/images/ultimateheight/hero.jpg",
+    image: "/images/ultimateheight/hero.webp",
     brochure: "/images/ultimateheight/ultimate-heights-brochure.pdf",
   },
 
@@ -139,10 +139,10 @@ export const ultimateHeightData = {
   ],
 
   gallery: [
-    { title: "Premium Building Exterior", category: "Exterior", src: "/images/ultimateheight/exterior.jpg", alt: "Ultimate Heights Building Exterior" },
-    { title: "Luxury Living Room", category: "Interior", src: "/images/ultimateheight/living-room.jpg", alt: "Luxury Living Room" },
-    { title: "Swimming Pool & Deck", category: "Amenities", src: "/images/ultimateheight/pool.jpg", alt: "Swimming Pool" },
-    { title: "Modern Parking Facilities", category: "Amenities", src: "/images/ultimateheight/parking.jpg", alt: "Parking" },
+    { title: "Premium Building Exterior", category: "Exterior", src: "/images/ultimateheight/exterior.webp", alt: "Ultimate Heights Building Exterior" },
+    { title: "Luxury Living Room", category: "Interior", src: "/images/ultimateheight/living-room.webp", alt: "Luxury Living Room" },
+    { title: "Swimming Pool & Deck", category: "Amenities", src: "/images/ultimateheight/pool.webp", alt: "Swimming Pool" },
+    { title: "Modern Parking Facilities", category: "Amenities", src: "/images/ultimateheight/parking.webp", alt: "Parking" },
     // { title: "Clubhouse & Lifestyle Amenities", category: "Amenities", src: "/images/ultimateheight/clubhouse.jpg", alt: "Clubhouse" },
   ],
 
@@ -219,11 +219,11 @@ export const ultimateHeightData = {
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d117304.30132338692!2d77.34848245!3d23.1593883!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x397c6895cb3a0001%3A0x0!2sAura%20Mall%2C%20Bhopal!5e0!3m2!1sen!2sin!4v1700000000000",
 
   images: {
-    hero: "/images/ultimateheight/hero.jpg",
-    exterior: "/images/ultimateheight/exterior.jpg",
+    hero: "/images/ultimateheight/hero.webp",
+    exterior: "/images/ultimateheight/exterior.webp",
     // clubhouse: "/images/ultimateheight/clubhouse.jpg",
-    pool: "/images/ultimateheight/pool.jpg",
-    livingRoom: "/images/ultimateheight/living-room.jpg",
+    pool: "/images/ultimateheight/pool.webp",
+    livingRoom: "/images/ultimateheight/living-room.webp",
     logo: "/images/ultimateheight/Logo.jpeg",
     logo2: "/images/ultimateheight/Logo2.jpeg",
   },

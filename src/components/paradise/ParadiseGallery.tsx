@@ -11,19 +11,19 @@ export default function ParadiseGallery() {
     {
       title: "Grand Entrance View",
       category: "Exterior",
-      src: "/images/paradise/Signature Paradise front view.jpg",
+      src: "/images/paradise/Signature Paradise front view.webp",
       alt: "Signature Paradise Front Entrance Gate",
     },
     {
       title: "Club House Side View",
       category: "Amenities",
-      src: "/images/paradise/Signature Paradise Club House Side view.jpg",
+      src: "/images/paradise/Signature Paradise Club House Side view.webp",
       alt: "Signature Paradise Club House Side View",
     },
     {
       title: "Township Boundary Wall",
       category: "Exterior",
-      src: "/images/paradise/Signature Paradise -Boundarywall.jpg",
+      src: "/images/paradise/Signature Paradise -Boundarywall.webp",
       alt: "Signature Paradise Boundary Wall",
     },
   ];

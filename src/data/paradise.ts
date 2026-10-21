@@ -23,7 +23,7 @@ export const paradiseData = {
       "Premium Township Living",
       "Limited Inventory Available",
     ],
-    image: "/images/paradise/Signature Paradise front view.jpg",
+    image: "/images/paradise/Signature Paradise front view.webp",
   },
 
   strip: {
@@ -165,9 +165,9 @@ export const paradiseData = {
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d117304.30132338692!2d77.34848245!3d23.1593883!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x397c430a91176bc5%3A0xc3626e84d43be671!2sKolar%20Rd%2C%20Bhopal%2C%20Madhya%20Pradesh!5e0!3m2!1sen!2sin!4v1700000000000",
 
   images: {
-    clubhouse: "/images/paradise/Signature Paradise Club House Side view.jpg",
-    boundary: "/images/paradise/Signature Paradise -Boundarywall.jpg",
-    front: "/images/paradise/Signature Paradise front view.jpg",
+    clubhouse: "/images/paradise/Signature Paradise Club House Side view.webp",
+    boundary: "/images/paradise/Signature Paradise -Boundarywall.webp",
+    front: "/images/paradise/Signature Paradise front view.webp",
     logo: "/images/paradise/Logo.jpeg",
   },
 
@@ -176,19 +176,19 @@ export const paradiseData = {
     {
       title: "Grand Entrance View",
       category: "Exterior",
-      src: "/images/paradise/Signature Paradise front view.jpg",
+      src: "/images/paradise/Signature Paradise front view.webp",
       alt: "Signature Paradise Front Entrance Gate",
     },
     {
       title: "Club House Side View",
       category: "Amenities",
-      src: "/images/paradise/Signature Paradise Club House Side view.jpg",
+      src: "/images/paradise/Signature Paradise Club House Side view.webp",
       alt: "Signature Paradise Club House Side View",
     },
     {
       title: "Township Boundary Wall",
       category: "Exterior",
-      src: "/images/paradise/Signature Paradise -Boundarywall.jpg",
+      src: "/images/paradise/Signature Paradise -Boundarywall.webp",
       alt: "Signature Paradise Boundary Wall",
     },
   ],
