@@ -32,7 +32,7 @@ const projects = [
     desc: "Sky-high living with panoramic city views, rooftop infinity pool & smart home automation.",
     img: "/images/ultimateheight/exterior.webp",
     href: "/ultimateheight",
-    badge: "Upcoming",
+    badge: "Selling Fast",
   },
 ];
 
